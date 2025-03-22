@@ -1,0 +1,171 @@
+@import './base.css';
+
+#app {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    grid-template-columns: 1fr 1fr;
+  }
+  .p-menubar-item-label {
+    color: blue;
+    font-weight: bold;
+  }
+
+  .p-tabview-tab-title {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px dashed green;
+    background-color: green;
+    margin: 5px;
+    border-radius: 5px; /* Optional: rounded corners */
+  }
+
+  .p-tabview-nav {
+    background: linear-gradient(to right, #4caf50, #45a049);
+    border-radius: 8px;
+    padding: 5px;
+  }
+  .p-tabview-nav li {
+    margin: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  .p-tabview-tab {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: white;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  .p-tabview-tab:hover {
+    background: #4caf50;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  .p-tabview-tab.p-highlight {
+    background: #45a049 !important;
+    color: white !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .p-tabview-panels {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 15px;
+    background: #fff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Style for Tabs Container */
+  .card {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .p-inputtext {
+    font-weight: bold;
+  }
+  ::v-deep(.p-paginator) {
+    background-color: #f8f9fa !important;
+  }
+  /* Make the entire paginator bar rounded */
+  .p-paginator {
+    background-color: #f8f9fa !important;
+    border-radius: 25px !important; /* Adjust for roundness */
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Make page buttons circular */
+  .p-paginator .p-paginator-pages .p-paginator-page {
+    width: 35px; /* Adjust for size */
+    height: 35px;
+    border-radius: 50% !important; /* Fully rounded */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black !important;
+    color: white !important;
+    border: none;
+    margin: 3px;
+  }
+
+  /* Active page button */
+  .p-paginator .p-highlight {
+    background-color: black !important; /* Blue */
+    color: white !important;
+  }
+
+  /* Hover effect */
+  .p-paginator .p-paginator-pages .p-paginator-page:hover {
+    background-color: black !important;
+    color: white !important;
+  }
+
+  /* Make next/prev buttons circular */
+  .p-paginator .p-paginator-next,
+  .p-paginator .p-paginator-prev {
+    width: 35px;
+    height: 35px;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef !important;
+    color: black !important;
+    border: none;
+    margin: 3px;
+  }
+
+  /* Hover effect for next/prev */
+  .p-paginator .p-paginator-next:hover,
+  .p-paginator .p-paginator-prev:hover {
+    background-color: black !important;
+    color: white !important;
+  }
+
+  .p-menubar-item-icon.pi.pi-home {
+    font-size: 20px;
+    color: blue;
+  }
+  .p-menubar-item-icon.pi.pi-globe {
+    font-size: 20px; /* Increase size */
+    color: blue;
+  }
+  .pi.pi-home,
+  .pi.pi-globe {
+    font-size: 20px;
+    color: blue;
+  }
+}
