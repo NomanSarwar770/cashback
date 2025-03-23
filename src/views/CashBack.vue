@@ -12,7 +12,7 @@ const columns = [
   { field: 'rakuten', header: 'Rakuten' },
   { field: 'rebatesMe', header: 'RebatesMe' },
   { field: 'topCashback', header: 'TopCashback' },
-  { field: 'moreSites', header: 'More Sites' }
+  { field: 'moreSites', header: 'More Sites' },
 ];
 
 const cashbackData = ref([
@@ -24,7 +24,7 @@ const cashbackData = ref([
   { store: "Macy's", bestRate: "7%", beFrugal: "6.5%", extraBux: "6%", mrRebates: "5.2%", priceCom: "5%", rakuten: "6.8%", rebatesMe: "7.2%", topCashback: "7.5%", moreSites: "View" },
   { store: "Nike", bestRate: "4%", beFrugal: "3.5%", extraBux: "3%", mrRebates: "2.5%", priceCom: "2.8%", rakuten: "3.7%", rebatesMe: "4.1%", topCashback: "4.3%", moreSites: "View" },
   { store: "Apple", bestRate: "2%", beFrugal: "1.5%", extraBux: "1%", mrRebates: "0.8%", priceCom: "1.2%", rakuten: "1.9%", rebatesMe: "2.1%", topCashback: "2.3%", moreSites: "View" },
-  { store: "Adidas", bestRate: "5.5%", beFrugal: "5%", extraBux: "4.5%", mrRebates: "4.2%", priceCom: "3.9%", rakuten: "5.3%", rebatesMe: "5.6%", topCashback: "5.9%", moreSites: "View" }
+  { store: "Adidas", bestRate: "5.5%", beFrugal: "5%", extraBux: "4.5%", mrRebates: "4.2%", priceCom: "3.9%", rakuten: "5.3%", rebatesMe: "5.6%", topCashback: "5.9%", moreSites: "View" },
 ]);
 </script>
 

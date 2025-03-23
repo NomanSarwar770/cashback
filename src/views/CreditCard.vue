@@ -13,8 +13,6 @@ const columns = ref([
   { field: "moreSites", header: "More Sites" },
 ]);
 
-
-
 // Dummy data for Credit Card Points tab
 const CreditCardPoints = ref([
   { store: "Delta", bestRate: "8%", alaska: "7%", american: "6.5%", southwest: "6%", united: "5.5%", moreSites: "View" },
@@ -33,6 +31,7 @@ const CreditCardPoints = ref([
     </DataTable>
   </div>
 </template>
+
 <style scoped>
 /* Table Wrapper */
 .table-container {
