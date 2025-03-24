@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import Dialog from 'primevue/dialog';
+import img1 from '@/assets/pexels-pixabay-33109.jpg'
+import img2 from '@/assets/pexels-pixabay-326055.jpg'
+import img3 from '@/assets/pexels-pixabay-33545.jpg'
 
 const stores = ref([
   { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5 },
@@ -68,15 +71,15 @@ const prevImages = (type) => {
     <!-- Carousel Items -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="/assets/pexels-pixabay-33109.jpg" class="d-block w-100"
+        <img :src="img1" class="d-block w-100"
           alt="Slide 1">
       </div>
       <div class="carousel-item">
-        <img src="/assets/pexels-pixabay-326055.jpg" class="d-block w-100"
+        <img :src="img2" class="d-block w-100"
           alt="Slide 2">
       </div>
       <div class="carousel-item">
-        <img src="/assets/pexels-pixabay-33545.jpg" class="d-block w-100"
+        <img :src="img3" class="d-block w-100"
           alt="Slide 3">
       </div>
     </div>
