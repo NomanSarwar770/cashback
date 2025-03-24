@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import Dialog from 'primevue/dialog';
 
 const stores = ref([
   { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5 },
@@ -14,6 +15,7 @@ const stores = ref([
   { id: 9, name: 'Lenovo', image: new URL('../assets/lenovo.png', import.meta.url).href, reward: 4 },
   { id: 10, name: 'eBay', image: new URL('../assets/ebay.png', import.meta.url).href, reward: 3 },
 ]);
+
 
 // Stores for Most Viewed (default order)
 const mostViewedStores = computed(() => {
@@ -66,15 +68,15 @@ const prevImages = (type) => {
     <!-- Carousel Items -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="C:\Users\HYPER\Documents\Github\cashback\src\assets\pexels-pixabay-33109.jpg" class="d-block w-100"
+        <img src="/assets/pexels-pixabay-33109.jpg" class="d-block w-100"
           alt="Slide 1">
       </div>
       <div class="carousel-item">
-        <img src="C:\Users\HYPER\Documents\Github\cashback\src\assets\pexels-pixabay-326055.jpg" class="d-block w-100"
+        <img src="/assets/pexels-pixabay-326055.jpg" class="d-block w-100"
           alt="Slide 2">
       </div>
       <div class="carousel-item">
-        <img src="C:\Users\HYPER\Documents\Github\cashback\src\assets\pexels-pixabay-33545.jpg" class="d-block w-100"
+        <img src="/assets/pexels-pixabay-33545.jpg" class="d-block w-100"
           alt="Slide 3">
       </div>
     </div>
