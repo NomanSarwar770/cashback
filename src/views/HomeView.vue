@@ -5,6 +5,8 @@ import Dialog from 'primevue/dialog';
 import img1 from '@/assets/pexels-pixabay-33109.jpg'
 import img2 from '@/assets/pexels-pixabay-326055.jpg'
 import img3 from '@/assets/pexels-pixabay-33545.jpg'
+import img4 from '@/assets/athleta.jpg'
+import img5 from '@/assets/lenovo.png'
 
 const stores = ref([
   { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5 },
@@ -191,12 +193,12 @@ const prevImages = (type) => {
 
       <div class="table-card" id="advrt">
         <h3 class="adv">Advertisement</h3>
-        <img src="C:\Users\HYPER\Documents\Github\cashback\src\assets\athleta.jpg" alt="Ad Banner" class="ad-banner" />
+        <img :src="img4" alt="Ad Banner" class="ad-banner" />
       </div>
 
       <div class="table-card" id="advrt">
         <h3 class="adv">Advertisement</h3>
-        <img src="C:\Users\HYPER\Documents\Github\cashback\src\assets\lenovo.png" alt="Ad Banner" class="ad-banner" />
+        <img :src="img5" alt="Ad Banners" class="ad-banner" />
       </div>
     </div>
   </div>
