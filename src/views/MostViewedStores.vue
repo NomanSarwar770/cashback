@@ -1,7 +1,13 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+const route = useRoute();
+
+// Get store name from the URL
+const storeName = computed(() => route.params.storeName ? route.params.storeName.replace(/-/g, ' ').toUpperCase() : '');
+
 
 const columns = ref([
   { field: "store", header: "Store" },
@@ -22,7 +28,7 @@ const mostViewedStores = ref([
 
 <template>
   <div class="table-container">
-    <h2 class="table-title">The Most Viewed Stores</h2>
+    <h2 class="table-title"> {{ storeName }} The Most Viewed Stores</h2>
     <DataTable :value="mostViewedStores" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
       responsiveLayout="scroll" class="styled-table">
       <Column v-for="(col, index) in columns" :key="index" :field="col.field" :header="col.header" />
