@@ -110,8 +110,8 @@ const prevImages = (type) => {
           :key="store.id" class="image-card">
           <RouterLink :to="store.path" style="cursor: pointer;">
             <img :src="store.image" :alt="store.name" />
-            <p>{{ store.name }}</p>
           </RouterLink>
+          <p>{{ store.name }}</p>
         </div>
       </div>
       <Dialog v-model:visible="showDialog" modal header="Most Viewed Stores" :style="{ width: '80vw', height: '80vh' }"
@@ -137,7 +137,6 @@ const prevImages = (type) => {
 
     <!-- Stores Sorted by Reward -->
     <div class="row content-row">
-
       <div class="title-container">
         <h2 class="title">Stores Sorted by Reward</h2>
         <a href="#" @click.prevent="showDialog = true" class="see-all-link">
@@ -151,8 +150,8 @@ const prevImages = (type) => {
           :key="store.id" class="image-card">
           <RouterLink :to="store.path" style="cursor: pointer;">
             <img :src="store.image" :alt="store.name" />
-            <p>{{ store.name }}</p>
           </RouterLink>
+          <p>{{ store.name }}</p>
         </div>
       </div>
 
@@ -198,7 +197,7 @@ const prevImages = (type) => {
 
       <div class="table-card" id="advrt">
         <h3 class="adv">Advertisement</h3>
-        <img :src="img5" alt="Ad Banners" class="ad-banner" />
+        <img :src="img5" alt="Ad Banner" class="ad-banner" />
       </div>
     </div>
   </div>
@@ -250,7 +249,7 @@ const prevImages = (type) => {
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 15px;
   margin-bottom: -30px;
 
@@ -274,7 +273,7 @@ const prevImages = (type) => {
 }
 
 .image-card p {
-  margin-top: 5px;
+  margin-top: 15px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -421,9 +420,7 @@ const prevImages = (type) => {
   align-items: center;
   justify-content: center;
   width: 50px;
-  /* Adjust size */
   height: 50px;
-
   padding: 5px;
   background: white;
   border: none;
@@ -471,9 +468,9 @@ const prevImages = (type) => {
 
 .carousel img {
   width: 100vw;
-  height: 400px;
+  height: 450px;
   object-fit: cover;
-  margin-top: 70px;
+  margin-top: 0;
 
 }
 

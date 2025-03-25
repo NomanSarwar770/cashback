@@ -5,7 +5,7 @@ import Column from 'primevue/column';
 
 const columns = ref([
   { field: "store", header: "Store" },
-  { field: "bestRate", header: "Best Rate" }
+  { field: "bestRate", header: "Best Rate" },
 ]);
 
 const mostViewedStores = ref([

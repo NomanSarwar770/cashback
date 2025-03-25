@@ -1,24 +1,23 @@
 <script setup>
-import { RouterLink, useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Menubar from 'primevue/menubar';
 import InputText from 'primevue/inputtext';
-
-
 import logo from '../assets/RS Icon.png';
+import { RouterLink, useRoute } from 'vue-router';
 
+// Get the current route
+const route = useRoute();
 
 // Tabs Data
 const tabs = ref([
-
-  { label: 'Browse Stores In:', path: '/' },
   { label: 'Cashback', path: '/cashback' },
   { label: 'Travel Miles Points', path: '/travel' },
   { label: 'Credit Card Points', path: '/credit' },
   { label: 'Other Reward Points', path: '/rewards' }
 ]);
 
-
+// Hide tabs on the homepage ('/')
+const showTabs = computed(() => route.path !== '/');
 </script>
 
 <template>
@@ -35,27 +34,23 @@ const tabs = ref([
       <template #end>
         <div class="search-container">
           <div class="search-wrapper">
-            <InputText placeholder="Search Store here" v-tooltip.top="'Search Store'" type="text" class="search-bar" />
+            <InputText placeholder="Search Store here" type="text" class="search-bar" />
             <i class="pi pi-search search-icon"></i>
           </div>
         </div>
       </template>
     </Menubar>
-    <div class="tabs-container">
+
+    <!-- Hide tabs when showTabs is false -->
+    <div class="tabs-container" v-if="showTabs">
       <RouterLink v-for="tab in tabs" :key="tab.label" :to="tab.path" class="tab"
-        :class="{ active: $route.path === tab.path }">
+        :class="{ active: route.path === tab.path }">
         {{ tab.label }}
       </RouterLink>
-
     </div>
-
   </header>
 
-  <!-- Tabs Section -->
-
-
-  <div class="carousel-slider">
-  </div>
+  <div class="carousel-slider"></div>
 </template>
 
 <style scoped>
@@ -92,8 +87,8 @@ const tabs = ref([
 }
 
 .tab.active {
-  color: blue;
-  border-bottom: 3px solid blue;
+  color: green;
+  border-bottom: 3px solid green;
   text-decoration: none;
 }
 
@@ -111,13 +106,13 @@ const tabs = ref([
 }
 
 .search-bar {
+  font-size: 12px !important;
+  font-weight: bold;
   width: 300px;
   height: 40px;
   border-radius: 8px;
   padding-left: 10px;
-  /* Remove space for left icon */
   padding-right: 20px;
-  /* Add space for right icon */
   border: 1px solid #ccc;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
@@ -127,7 +122,9 @@ const tabs = ref([
   border-color: black;
   box-shadow: 0px 2px 8px black;
   outline: none;
+
 }
+
 
 .search-icon {
   position: absolute;
@@ -151,11 +148,11 @@ nav a {
 }
 
 nav a:hover {
-  color: blue;
+  color: green;
 }
 
 body {
-  padding-top: 90px;
+  padding-top: 70px;
   overflow-x: hidden;
   background-color: white;
 }
@@ -168,7 +165,7 @@ body {
   position: fixed;
   left: 0;
   z-index: 999;
-
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
 }
 
@@ -187,8 +184,8 @@ body {
 }
 
 .tab:hover {
-  color: blue;
-  border-bottom: 3px solid blue;
+  color: green;
+  border-bottom: 3px solid green;
 }
 
 .pi.pi-home,
@@ -208,8 +205,6 @@ body {
   width: 100vw;
   height: 400px;
   object-fit: cover;
-  margin-top: 70px;
-
 }
 
 .carousel-inner {
