@@ -1,35 +1,50 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import Tabs from '@/components/Tabs.vue';
 
-const columns = ref([
-  { field: "store", header: "Store" },
-  { field: "bestRate", header: "Best Rate" },
-  { field: "alaska", header: "Alaska" },
-  { field: "american", header: "American" },
-  { field: "southwest", header: "Southwest" },
-  { field: "united", header: "United" },
-  { field: "moreSites", header: "More Sites" },
-]);
+const giftcardsData = ref([]);
 
-// Dummy data for Travel Miles/Points tab
-const travelMilesData = ref([
-  { store: "Delta", bestRate: "8%", alaska: "7%", american: "6.5%", southwest: "6%", united: "5.5%", moreSites: "View" },
-  { store: "JetBlue", bestRate: "6%", alaska: "5.5%", american: "5%", southwest: "4.5%", united: "4%", moreSites: "View" },
-  { store: "Expedia", bestRate: "5%", alaska: "4.5%", american: "4%", southwest: "3.5%", united: "3%", moreSites: "View" },
-]);
+onMounted(async () => {
+  try {
+    const response = await fetch("https://revroi.oaroulette.com/?action=gift_cards&hostname=amazon");
+    const data = await response.json();
+    giftcardsData.value = data.gift_cards;
+  } catch (error) {
+    console.error("Error fetching gift cards:", error);
+  }
+});
 </script>
-<template>
-  <div class="table-container">
-    <h2 class="table-title">Travel Miles/Points Comparison</h2>
 
-    <DataTable :value="travelMilesData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
-      responsiveLayout="scroll" class="styled-table">
-      <Column v-for="(col, index) in columns" :key="index" :field="col.field" :header="col.header" />
+<template>
+  <Tabs />
+  <div class="table-container">
+    <h2 class="table-title">Gift Card Offers</h2>
+    <DataTable
+      :value="giftcardsData"
+      paginator
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      responsiveLayout="scroll"
+      class="styled-table"
+    >
+      <Column field="favicon" header="favicon">
+        <template #body="slotProps">
+          <img v-if="slotProps.data.favicon" :src="slotProps.data.favicon" :alt="slotProps.data.title" width="30" height="30" />
+        </template>
+      </Column>
+      <Column field="title" header="title" />
+      <Column field="rate" header="rate" />
+      <Column field="link" header="link">
+        <template #body="slotProps">
+          <a :href="slotProps.data.link" target="_blank" class="offer-link">Visit Offer</a>
+        </template>
+      </Column>
     </DataTable>
   </div>
 </template>
+
 <style scoped>
 /* Table Wrapper */
 .table-container {
@@ -44,7 +59,7 @@ const travelMilesData = ref([
   border: 2px solid #ccc;
   transition: 0.3s ease-in-out;
   text-align: center;
-  margin-top: 11%;
+  margin-top: 2%;
   margin-bottom: 4%;
 }
 
@@ -78,7 +93,7 @@ const travelMilesData = ref([
   border: none;
   background: #444;
   color: white;
-  text-transform: uppercase;
+  text-transform: lowercase;
   font-size: 13px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
@@ -108,6 +123,17 @@ const travelMilesData = ref([
 .styled-table :deep(.p-datatable-tbody tr:hover) {
   background-color: #e0e0e0;
   transition: background-color 0.3s ease-in-out;
+}
+
+/* Offer Link Styling */
+.offer-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.offer-link:hover {
+  text-decoration: underline;
 }
 
 /* Responsive Table */

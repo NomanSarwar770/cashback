@@ -8,8 +8,6 @@ import img3 from '@/assets/pexels-pixabay-33545.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
-
-
 const stores = ref([
   { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5, path: "cashback/?q=walmart" },
   { id: 2, name: 'Nike', image: new URL('../assets/nike.png', import.meta.url).href, reward: 3, path: "cashback/?q=nike" },
@@ -152,7 +150,7 @@ const prevImages = (type) => {
         <div
           v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
           :key="store.id" class="image-card">
-          <RouterLink :to="`/storesbyreward/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
+          <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
   <img :src="store.image" :alt="store.name" />
 </RouterLink>
           <p>{{ store.name }}</p>
@@ -253,26 +251,24 @@ const prevImages = (type) => {
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 15px;
-  margin-bottom: -30px;
-
+  margin-bottom: 10px;
+  justify-items: center;
 }
-
 .image-card {
   text-align: center;
   background: white;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  max-height: fit-content;
-  width: 80%;
-  margin-left: 30px;
+  width: 100%;
+  max-width: 150px;
 }
 
 .image-card img {
   width: 100%;
-  height: 50%;
+  height: auto;
   border-radius: 5px;
 }
 
@@ -285,8 +281,7 @@ const prevImages = (type) => {
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 10px;
 }
 
 .round-btn {
@@ -430,6 +425,19 @@ const prevImages = (type) => {
   border: none;
   cursor: pointer;
 }
+.image-button,
+.image-buttonp {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.image-button img,
+.image-buttonp img {
+  width: 30px;
+  height: auto;
+}
 
 .image-buttonp {
   display: flex;
@@ -490,5 +498,48 @@ const prevImages = (type) => {
 
 .carousel-slider {
   margin-top: 0px;
+}
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust for tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .see-all-link {
+    font-size: 14px;
+    margin: 10px auto; /* Centers it */
+    display: block;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on small screens */
+    gap: 10px;
+  }
+
+  .image-card {
+    max-width: 130px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .image-grid {
+    grid-template-columns: repeat(1, 1fr); /* Single column on very small screens */
+  }
+
+  .image-card {
+    max-width: 120px;
+  }
+
+  .title-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 }
 </style>

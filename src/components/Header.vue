@@ -1,28 +1,28 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import Menubar from 'primevue/menubar';
 import InputText from 'primevue/inputtext';
 import logo from '../assets/RS Icon.png';
-import { RouterLink, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-// Get the current route
-const route = useRoute();
+const router = useRouter();
+const searchQuery = ref('');
+const isMobileMenuVisible = ref(false);
 
-// Tabs Data
-const tabs = ref([
-  { label: 'Cashback', path: '/cashback' },
-  { label: 'Travel Miles Points', path: '/travel' },
-  { label: 'Credit Card Points', path: '/credit' },
-  { label: 'Other Reward Points', path: '/rewards' }
-]);
+const handleSubmit = () => {
+  router.push({ path: `/cashback/${searchQuery.value}` });
+};
 
-// Hide tabs on the homepage ('/')
-const showTabs = computed(() => route.path !== '/');
+// Toggle mobile menu
+const toggleMobileMenu = () => {
+  isMobileMenuVisible.value = !isMobileMenuVisible.value;
+};
 </script>
 
 <template>
   <header class="header-container">
     <Menubar class="full-width-navbar">
+      <!-- Left Section: Logo -->
       <template #start>
         <div class="left-section">
           <router-link to="/">
@@ -31,31 +31,31 @@ const showTabs = computed(() => route.path !== '/');
         </div>
       </template>
 
+      <!-- Middle Section: Search Bar (Hidden in Mobile) -->
       <template #end>
-        <form action="cashback">
-          <div class="search-container">
+        <form @submit.prevent="handleSubmit" class="search-container">
           <div class="search-wrapper">
-            <InputText name="q" placeholder="Search Store here" type="text" class="search-bar" />
+            <InputText v-model="searchQuery" placeholder="Search Store here" type="text" class="search-bar" />
             <i class="pi pi-search search-icon"></i>
           </div>
-        </div>
         </form>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" @click="toggleMobileMenu">
+          <i class="pi pi-bars"></i>
+        </button>
       </template>
     </Menubar>
 
-    <!-- Hide tabs when showTabs is false -->
-    <div class="tabs-container" v-if="showTabs">
-      <RouterLink v-for="tab in tabs" :key="tab.label" :to="tab.path" class="tab"
-        :class="{ active: route.path === tab.path }">
-        {{ tab.label }}
-      </RouterLink>
+    <!-- Mobile Dropdown Menu -->
+    <div v-if="isMobileMenuVisible" class="mobile-menu">
+      <router-link to="/" class="mobile-menu-item">Home</router-link>
     </div>
   </header>
-
-  <div class="carousel-slider"></div>
 </template>
 
 <style scoped>
+/* Navbar Container */
 .header-container {
   width: 100%;
   position: fixed;
@@ -64,23 +64,28 @@ const showTabs = computed(() => route.path !== '/');
   z-index: 1000;
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
 }
 
+/* Menubar Full Width */
 .full-width-navbar {
-  width: 100%;
-  height: 80px;
+  width: 100%; /* Ensures full width */
+  max-width: 1350px; /* Slightly larger max width for balance */
+  margin: 0 auto; /* Centers the navbar */
+  height: 70px;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-}
+  padding: 0 5px; /* Reduce padding further */
 
+  box-shadow: none; /* Removes any shadow effect */
+  border: none; /* Ensures no borders */
+}
+/* Left Section - Logo */
 .left-section {
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-left: 70px;
 }
 
 .logo {
@@ -88,17 +93,11 @@ const showTabs = computed(() => route.path !== '/');
   width: auto;
 }
 
-.tab.active {
-  color: green;
-  border-bottom: 3px solid green;
-  text-decoration: none;
-}
-
+/* Search Bar */
 .search-container {
-  flex-grow: 1;
   display: flex;
   justify-content: center;
-  margin-right: 70px;
+  margin-right: 10px;
 }
 
 .search-wrapper {
@@ -108,15 +107,13 @@ const showTabs = computed(() => route.path !== '/');
 }
 
 .search-bar {
-  font-size: 12px !important;
-  font-weight: bold;
-  width: 300px;
+  font-size: 14px;
+  width: 250px;
   height: 40px;
   border-radius: 8px;
   padding-left: 10px;
-  padding-right: 20px;
+  padding-right: 40px;
   border: 1px solid #ccc;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
 }
 
@@ -124,102 +121,87 @@ const showTabs = computed(() => route.path !== '/');
   border-color: black;
   box-shadow: 0px 2px 8px black;
   outline: none;
-
 }
 
-
+/* Search Icon */
 .search-icon {
   position: absolute;
-  right: 1px;
+  right: 0px;
   color: white;
   background-color: black;
   padding: 12px;
   border-radius: 0px 5px 5px 0px;
 }
 
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 10px 15px;
-}
-
-nav a:hover {
-  color: green;
-}
-
-body {
-  padding-top: 70px;
-  overflow-x: hidden;
-  background-color: white;
-}
-
-.tabs-container {
-  display: flex;
-  background-color: white;
-  width: 100%;
-  padding: 10px 0;
-  position: fixed;
-  left: 0;
-  z-index: 999;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
-}
-
-.tab {
-  flex-grow: 1;
-  text-align: center;
-  padding: 10px 20px;
+/* Mobile Menu Button */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
-  background-color: white;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease-in-out;
+  margin-left: 15px;
+}
+
+/* Mobile Dropdown Menu */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.mobile-menu-item {
+  display: block;
+  padding: 10px;
   text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
 
-.tab:hover {
-  color: green;
-  border-bottom: 3px solid green;
+.mobile-menu-item:hover {
+  background-color: #f0f0f0;
 }
 
-.pi.pi-home,
-.pi.pi-globe {
-  font-size: 20px;
-  color: blue;
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Adjust Navbar Layout */
+  .full-width-navbar {
+    padding: 0 10px;
+  }
+
+  /* Adjust Search Bar Width */
+  .search-bar {
+    width: 180px;
+  }
+
+  /* Show Mobile Menu Button */
+  .mobile-menu-button {
+    display: block;
+  }
+
+  /* Hide Search Bar on Small Screens */
+  .search-container {
+    display: none;
+  }
+
+  /* Show Mobile Menu when active */
+  .mobile-menu {
+    display: block;
+  }
 }
 
-.carousel {
-  width: 100vw;
-  max-width: 100%;
-  margin: 0 auto;
-  margin-top: 75px;
-}
+@media (max-width: 480px) {
+  .logo {
+    height: 40px;
+  }
 
-.carousel img {
-  width: 100vw;
-  height: 400px;
-  object-fit: cover;
-}
-
-.carousel-inner {
-  width: 100%;
-
-}
-
-.carousel-item {
-  width: 100%;
-
-}
-
-.carousel-slider {
-  margin-top: 0px;
+  .search-bar {
+    width: 150px;
+  }
 }
 </style>
