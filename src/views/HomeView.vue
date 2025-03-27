@@ -112,7 +112,7 @@ const prevImages = (type) => {
         <div
           v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
           :key="store.id" class="image-card">
-          <RouterLink :to="`/mostviewedstores/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
+          <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
   <img :src="store.image" :alt="store.name" />
 </RouterLink>
           <p>{{ store.name }}</p>
