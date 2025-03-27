@@ -32,12 +32,14 @@ const showTabs = computed(() => route.path !== '/');
       </template>
 
       <template #end>
-        <div class="search-container">
+        <form action="cashback">
+          <div class="search-container">
           <div class="search-wrapper">
-            <InputText placeholder="Search Store here" type="text" class="search-bar" />
+            <InputText name="q" placeholder="Search Store here" type="text" class="search-bar" />
             <i class="pi pi-search search-icon"></i>
           </div>
         </div>
+        </form>
       </template>
     </Menubar>
 

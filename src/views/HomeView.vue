@@ -9,8 +9,8 @@ import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
 const stores = ref([
-  { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5 },
-  { id: 2, name: 'Nike', image: new URL('../assets/nike.png', import.meta.url).href, reward: 3 },
+  { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5, path: "cashback/?q=walmart" },
+  { id: 2, name: 'Nike', image: new URL('../assets/nike.png', import.meta.url).href, reward: 3, path: "cashback/?q=nike" },
   { id: 3, name: 'Athleta', image: new URL('../assets/athleta.png', import.meta.url).href, reward: 4 },
   { id: 4, name: 'Temu', image: new URL('../assets/temu.png', import.meta.url).href, reward: 2 },
   { id: 5, name: 'Mac', image: new URL('../assets/mac.jpg', import.meta.url).href, reward: 6 },
@@ -24,7 +24,7 @@ const stores = ref([
 
 // Stores for Most Viewed (default order)
 const mostViewedStores = computed(() => {
-  return stores.value.map(store => ({ ...store, path: '/mostviewedstores' }));
+  return stores.value.map(store => ({ ...store }));
 });
 
 // Stores sorted by reward
