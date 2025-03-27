@@ -8,6 +8,8 @@ import img3 from '@/assets/pexels-pixabay-33545.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
+
+
 const stores = ref([
   { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5, path: "cashback/?q=walmart" },
   { id: 2, name: 'Nike', image: new URL('../assets/nike.png', import.meta.url).href, reward: 3, path: "cashback/?q=nike" },
@@ -29,14 +31,16 @@ const mostViewedStores = computed(() => {
 
 // Stores sorted by reward
 const sortedByRewardStores = computed(() => {
-  return [...stores.value]
-    .sort((a, b) => b.reward - a.reward)
-    .map(store => ({ ...store, path: '/storesbyreward' }));
+  return stores.value.map(store => ({
+    ...store,
+    path: `/storesbyreward/${store.name.toLowerCase().replace(/\s+/g, '-')}`
+  }));
 });
 
 // Pagination variables
 const showAllMostViewed = ref(false);
-const showDialog = ref(false);
+const showMostViewedDialog = ref(false);
+const showSortedByRewardDialog = ref(false);
 const showAllSortedByReward = ref(false);
 const startIndexMostViewed = ref(0);
 const startIndexSortedByReward = ref(0);
@@ -101,23 +105,23 @@ const prevImages = (type) => {
     <div class="row">
       <div class="title-container">
         <h2 class="title">The Most Viewed Stores</h2>
-        <a href="#" @click.prevent="showDialog = true" class="see-all-link">See All</a>
+        <a href="#" @click.prevent="showMostViewedDialog = true" class="see-all-link">See All</a>
       </div>
 
       <div class="image-grid">
         <div
           v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
           :key="store.id" class="image-card">
-          <RouterLink :to="store.path" style="cursor: pointer;">
-            <img :src="store.image" :alt="store.name" />
-          </RouterLink>
+          <RouterLink :to="`/mostviewedstores/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
+  <img :src="store.image" :alt="store.name" />
+</RouterLink>
           <p>{{ store.name }}</p>
         </div>
       </div>
-      <Dialog v-model:visible="showDialog" modal header="Most Viewed Stores" :style="{ width: '80vw', height: '80vh' }"
-        :breakpoints="{ '1199px': '90vw', '575px': '95vw' }">
+      <!-- Most Viewed Stores Dialog -->
+      <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores" :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
-          <div v-for="store in stores" :key="store.id" class="dialog-image-card">
+          <div v-for="store in mostViewedStores" :key="store.id" class="dialog-image-card">
             <img :src="store.image" :alt="store.name" />
             <p>{{ store.name }}</p>
           </div>
@@ -139,7 +143,7 @@ const prevImages = (type) => {
     <div class="row content-row">
       <div class="title-container">
         <h2 class="title">Stores Sorted by Reward</h2>
-        <a href="#" @click.prevent="showDialog = true" class="see-all-link">
+        <a href="#" @click.prevent="showSortedByRewardDialog = true" class="see-all-link">
           {{ showAllSortedByReward ? 'Show Less' : 'See All' }}
         </a>
       </div>
@@ -148,17 +152,17 @@ const prevImages = (type) => {
         <div
           v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
           :key="store.id" class="image-card">
-          <RouterLink :to="store.path" style="cursor: pointer;">
-            <img :src="store.image" :alt="store.name" />
-          </RouterLink>
+          <RouterLink :to="`/storesbyreward/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
+  <img :src="store.image" :alt="store.name" />
+</RouterLink>
           <p>{{ store.name }}</p>
         </div>
       </div>
 
-      <Dialog v-model:visible="showDialog" modal header="Most Viewed Stores" :style="{ width: '80vw', height: '80vh' }"
-        :breakpoints="{ '1199px': '90vw', '575px': '95vw' }">
+      <!-- Stores Sorted by Reward Dialog -->
+      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward" :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
-          <div v-for="store in stores" :key="store.id" class="dialog-image-card">
+          <div v-for="store in sortedByRewardStores" :key="store.id" class="dialog-image-card">
             <img :src="store.image" :alt="store.name" />
             <p>{{ store.name }}</p>
           </div>

@@ -19,8 +19,18 @@ const router = createRouter({
     { path: '/travel', name: 'Travel', component: Travel },
     { path: '/monitor', name: 'MyMonitor', component: MyMonitor },
     { path: '/storesdata', name: 'StoresData', component: StoresData },
-    { path: '/storesbyreward', name: 'StoresByReward', component: StoresByReward },
-    { path: '/mostviewedstores', name: 'MostViewedStores', component: MostViewedStores },
+    {
+      path: '/storesbyreward/:storeName',
+      name: 'StoresByReward',
+      component: StoresByReward,
+      props: true,
+    },
+    {
+      path: '/mostviewedstores/:storeName',
+      name: 'MostViewedStores',
+      component: MostViewedStores,
+      props: true,
+    },
   ],
 })
 
