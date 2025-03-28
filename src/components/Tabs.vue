@@ -7,6 +7,9 @@ const route = useRoute();
 const tabs = ref([
   { label: 'Cashback', path: "/cashback/"+route.params.store },
   { label: 'Gift Cards', path: "/giftcards/"+route.params.store },
+  { label: 'Travel Points/Rewards', path: "/travelpointsrewards/"+route.params.store },
+  { label: 'Credit Card/Points', path: "/creditcardpoints/"+route.params.store },
+
 ]);
 
 </script>

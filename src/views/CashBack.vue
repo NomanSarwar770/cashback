@@ -4,8 +4,10 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Tabs from '@/components/Tabs.vue';
 import { useRoute } from 'vue-router';
+import ProgressSpinner from 'primevue/progressspinner';
 
 const cashbackData = ref([]);
+const isLoading = ref(true);
 const columns = ref([
   { field: 'favicon', header: 'Logo' },
   { field: 'title', header: 'Store' },
@@ -18,23 +20,31 @@ const hostname = route.params.store;
 
 onMounted(async () => {
   try {
-    const response = await fetch("https://revroi.oaroulette.com/?action=cashback&hostname="+hostname);
+    const response = await fetch("https://revroi.oaroulette.com/?action=cashback&hostname=" + hostname);
     const data = await response.json();
     cashbackData.value = data.cashback;
   } catch (error) {
     console.error("Error fetching data:", error);
+  } finally {
+    isLoading.value = false;
   }
 });
-console.log("Cashback.vue is rendering");
-
 </script>
 
 <template>
   <Tabs />
 
+  <div v-if="isLoading" class="loading-container">
+    <ProgressSpinner />
+    <p class="loading-text">Loading Cashback Offers...</p>
+  </div>
 
-  <div class="table-container">
+
+  <div v-if="!isLoading" class="table-container">
     <h2 class="table-title">Cashback Offers</h2>
+    <div v-if="cashbackData.length === 0" class="no-data">
+    <p>No cashback offers available at the moment.</p>
+  </div>
     <DataTable :value="cashbackData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
       responsiveLayout="scroll" class="styled-table">
       <Column field="favicon" header="Logo">
@@ -64,8 +74,8 @@ console.log("Cashback.vue is rendering");
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 90%;
-  max-width: 90%;
+  width: 100%;
+  max-width: 1500px;
   border: 2px solid #ccc;
   transition: 0.3s ease-in-out;
   text-align: center;
@@ -184,5 +194,20 @@ console.log("Cashback.vue is rendering");
   border-bottom: 3px solid green;
 }
 
+}
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  text-align: center;
+}
+
+.loading-text {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 </style>

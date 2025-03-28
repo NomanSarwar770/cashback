@@ -22,12 +22,10 @@ const stores = ref([
 ]);
 
 
-// Stores for Most Viewed (default order)
 const mostViewedStores = computed(() => {
   return stores.value.map(store => ({ ...store }));
 });
 
-// Stores sorted by reward
 const sortedByRewardStores = computed(() => {
   return stores.value.map(store => ({
     ...store,
@@ -35,7 +33,6 @@ const sortedByRewardStores = computed(() => {
   }));
 });
 
-// Pagination variables
 const showAllMostViewed = ref(false);
 const showMostViewedDialog = ref(false);
 const showSortedByRewardDialog = ref(false);
@@ -62,17 +59,14 @@ const prevImages = (type) => {
 </script>
 
 <template>
-  <!-- Carousel Section-->
   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 
-    <!-- Indicators -->
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
       <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
       <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
     </div>
 
-    <!-- Carousel Items -->
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img :src="img1" class="d-block w-100"
@@ -502,7 +496,7 @@ const prevImages = (type) => {
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .image-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust for tablets */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 

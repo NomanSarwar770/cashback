@@ -3,30 +3,15 @@ import { ref } from 'vue';
 import { RouterView, useRouter } from 'vue-router';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import ProgressSpinner from 'primevue/progressspinner';
 
 const router = useRouter();
-const isLoading = ref(false);
 
-router.beforeEach((to, from, next) => {
-  isLoading.value = true;
-  setTimeout(() => {
-    next();
-    isLoading.value = false;
-  }, 500);
-});
 </script>
 
 <template>
   <div class="app-container">
     <Header />
 
-    <div v-if="isLoading" class="loading-overlay">
-      <div class="loading-content">
-        <ProgressSpinner />
-        <p class="loading-text">Loading Data...</p>
-      </div>
-    </div>
 
     <main>
       <RouterView />
@@ -50,16 +35,4 @@ router.beforeEach((to, from, next) => {
   z-index: 9999;
 }
 
-.loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.loading-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
 </style>

@@ -6,55 +6,63 @@ import Tabs from '@/components/Tabs.vue';
 import { useRoute } from 'vue-router';
 import ProgressSpinner from 'primevue/progressspinner';
 
-
-const giftcardsData = ref([]);
-
+const cashbackData = ref([]);
+const travelPointsData = ref([]);
 const isLoading = ref(true);
+
+const columns = ref([
+  { field: 'favicon', header: 'Logo' },
+  { field: 'title', header: 'Store' },
+  { field: 'rate', header: 'Reward Rate' },
+  { field: 'link', header: 'Offer Link' }
+]);
+
 const route = useRoute();
 const hostname = route.params.store;
 
 onMounted(async () => {
   try {
-    const response = await fetch("https://revroi.oaroulette.com/?action=gift_cards&hostname="+hostname);
+    const response = await fetch(`https://revroi.oaroulette.com/?action=cashback&hostname=${hostname}`);
     const data = await response.json();
-    giftcardsData.value = data.gift_cards;
+
+    cashbackData.value = data.cashback;
+    travelPointsData.value = data.travel_points;
   } catch (error) {
-    console.error("Error fetching gift cards:", error);
-  }finally {
+    console.error("Error fetching data:", error);
+  } finally {
     isLoading.value = false;
   }
 });
+
 </script>
 
 <template>
   <Tabs />
+
   <div v-if="isLoading" class="loading-container">
     <ProgressSpinner />
-    <p class="loading-text">Loading giftcards Offers...</p>
+    <p class="loading-text">Loading Travel Points Rewards Offers...</p>
   </div>
-  <div v-if="!isLoading" class="table-container">
-    <h2 class="table-title">Gift Card Offers</h2>
-    <div v-if="giftcardsData.length === 0" class="no-data-container">
-      <p class="no-data-text">No data available</p>
-    </div>
-    <DataTable
-      :value="giftcardsData"
-      paginator
-      :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]"
-      responsiveLayout="scroll"
-      class="styled-table"
-    >
-      <Column field="favicon" header="favicon">
+
+
+  <!-- Travel Points Table -->
+  <div v-if="!isLoading && travelPointsData.length > 0" class="table-container">
+    <h2 class="table-title">Travel Points Rewards Offers</h2>
+    <div v-if="travelPointsData.length === 0" class="no-data">
+    <p>No travel points offers available at the moment.</p>
+  </div>
+    <DataTable :value="travelPointsData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
+      responsiveLayout="scroll" class="styled-table">
+      <Column field="favicon" header="Logo">
         <template #body="slotProps">
-          <img v-if="slotProps.data.favicon" :src="slotProps.data.favicon" :alt="slotProps.data.title" width="30" height="30" />
+          <img :src="slotProps.data.favicon" :alt="slotProps.data.title" width="20" height="20" />
         </template>
       </Column>
-      <Column field="title" header="title" />
-      <Column field="rate" header="rate" />
-      <Column field="link" header="link">
+      <Column field="title" header="Store" />
+      <Column field="rate" header="Reward Rate" />
+      <Column field="link" header="Offer Link">
         <template #body="slotProps">
-          <a :href="slotProps.data.link" target="_blank" class="offer-link">Visit Offer</a>
+          <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
         </template>
       </Column>
     </DataTable>
@@ -64,6 +72,7 @@ onMounted(async () => {
 <style scoped>
 /* Table Wrapper */
 .table-container {
+
   margin: 15px auto;
   padding: 16px;
   background: white;
@@ -75,9 +84,8 @@ onMounted(async () => {
   border: 2px solid #ccc;
   transition: 0.3s ease-in-out;
   text-align: center;
-  margin-top: 2%;
   margin-bottom: 4%;
-  min-height: 300px;
+  margin-top: 2%;
 }
 
 /* Table Title */
@@ -110,7 +118,7 @@ onMounted(async () => {
   border: none;
   background: #444;
   color: white;
-  text-transform: lowercase;
+  text-transform: uppercase;
   font-size: 13px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
@@ -142,22 +150,11 @@ onMounted(async () => {
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Offer Link Styling */
-.offer-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.offer-link:hover {
-  text-decoration: underline;
-}
-
 /* Responsive Table */
 @media (max-width: 768px) {
   .table-container {
-    width: 95%;
-    max-width: 95%;
+    margin-top: 0;
+    top: 0;
   }
 
   .styled-table :deep(.p-datatable-thead th),
@@ -165,6 +162,43 @@ onMounted(async () => {
     padding: 6px;
     font-size: 11px;
   }
+
+  .tab.active {
+  color: green;
+  border-bottom: 3px solid green;
+  text-decoration: none;
+}
+.tabs-container {
+  position: sticky;
+  min-height: 50px;
+  margin-top: 5vh;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 10px 0;
+  z-index: 1001;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+  flex-grow: 1;
+  text-align: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.tab:hover {
+  color: green;
+  border-bottom: 3px solid green;
+}
+
 }
 .loading-container {
   display: flex;
@@ -181,5 +215,4 @@ onMounted(async () => {
   font-weight: bold;
   color: #333;
 }
-
 </style>
