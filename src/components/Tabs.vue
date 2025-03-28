@@ -4,13 +4,10 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-console.log(route.path);
-
 const tabs = ref([
-  { label: 'Cashback', path: '/cashback/default' },
-  { label: 'Gift Cards', path: '/giftcards/default' },
+  { label: 'Cashback', path: "/cashback/"+route.params.store },
+  { label: 'Gift Cards', path: "/giftcards/"+route.params.store },
 ]);
-console.log(route.params);
 
 </script>
 

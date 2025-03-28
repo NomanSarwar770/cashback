@@ -3,12 +3,15 @@ import { ref, onMounted } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Tabs from '@/components/Tabs.vue';
+import { useRoute } from 'vue-router';
 
 const giftcardsData = ref([]);
+const route = useRoute();
+const hostname = route.params.store;
 
 onMounted(async () => {
   try {
-    const response = await fetch("https://revroi.oaroulette.com/?action=gift_cards&hostname=amazon");
+    const response = await fetch("https://revroi.oaroulette.com/?action=gift_cards&hostname="+hostname);
     const data = await response.json();
     giftcardsData.value = data.gift_cards;
   } catch (error) {
