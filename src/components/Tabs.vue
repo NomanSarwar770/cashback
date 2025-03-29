@@ -1,35 +1,41 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-const tabs = ref([
-  { label: 'Cashback', path: "/cashback/"+route.params.store },
-  { label: 'Gift Cards', path: "/giftcards/"+route.params.store },
-  { label: 'Travel Points/Rewards', path: "/travelpointsrewards/"+route.params.store },
-  { label: 'Credit Card/Points', path: "/creditcardpoints/"+route.params.store },
-
+const tabs = computed(() => [
+  { label: 'Cashback', path: `/cashback/${route.params.store}` },
+  { label: 'Gift Cards', path: `/giftcards/${route.params.store}` },
+  { label: 'Travel Points/Rewards', path: `/travelpointsrewards/${route.params.store}` },
+  { label: 'Credit Card/Points', path: `/creditcardpoints/${route.params.store}` }
 ]);
 
 </script>
 
 <template>
-   <div class="tabs-container">
-    <RouterLink v-for="tab in tabs" :key="tab.label" :to="tab.path" class="tab"
-      :class="{ active: route.path === tab.path }">
-      {{ tab.label }}
-    </RouterLink>
+  <div class="tabs-wrapper">
+    <div class="tabs-container">
+      <RouterLink v-for="tab in tabs" :key="tab.label" :to="tab.path" class="tab"
+        :class="{ active: route.path === tab.path }">
+        {{ tab.label }}
+      </RouterLink>
+    </div>
   </div>
 </template>
 
 <style scoped>
+
+.tabs-wrapper {
+  display: flex;
+  justify-content: center;
+}
 .tabs-container {
   margin-top: 100px;
   display: flex;
   background-color: white;
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 10;
   position: relative;
   left: 0;
   z-index: 999;
@@ -39,7 +45,6 @@ const tabs = ref([
 .tab {
   flex-grow: 1;
   text-align: center;
-  padding: 10px 20px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -48,6 +53,7 @@ const tabs = ref([
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease-in-out;
   text-decoration: none;
+
 }
 
 .tab.active {

@@ -31,9 +31,9 @@ const toggleMobileMenu = () => {
         </div>
       </template>
 
-      <!-- Middle Section: Search Bar (Hidden in Mobile) -->
+      <!-- Desktop Search Bar (Hidden in Mobile) -->
       <template #end>
-        <form @submit.prevent="handleSubmit" class="search-container">
+        <form @submit.prevent="handleSubmit" class="search-container desktop-search">
           <div class="search-wrapper">
             <InputText v-model="searchQuery" placeholder="Search Store here" type="text" class="search-bar" />
             <i class="pi pi-search search-icon"></i>
@@ -49,7 +49,15 @@ const toggleMobileMenu = () => {
 
     <!-- Mobile Dropdown Menu -->
     <div v-if="isMobileMenuVisible" class="mobile-menu">
-      <router-link to="/" class="mobile-menu-item">Home</router-link>
+      <!-- Search Bar inside Mobile Menu -->
+      <form @submit.prevent="handleSubmit" class="search-container mobile-search">
+        <div class="search-wrapper">
+          <InputText v-model="searchQuery" placeholder="Search Store here" type="text" class="search-bar" />
+          <i class="pi pi-search search-icon"></i>
+        </div>
+      </form>
+<!--
+      <router-link to="/" class="mobile-menu-item">Home</router-link> -->
     </div>
   </header>
 </template>
@@ -202,6 +210,31 @@ const toggleMobileMenu = () => {
 
   .search-bar {
     width: 150px;
+  }
+}
+/* Hide Search Bar on Mobile in Navbar */
+.desktop-search {
+  display: flex;
+}
+
+.mobile-search {
+  display: none;
+}
+
+/* Show Search in Mobile Menu */
+@media (max-width: 768px) {
+  .desktop-search {
+    display: none; /* Hide in navbar */
+  }
+
+  .mobile-search {
+    display: block; /* Show in mobile menu */
+    padding: 10px;
+  }
+
+  /* Adjust Search Bar Width */
+  .search-bar {
+    width: 100%;
   }
 }
 </style>

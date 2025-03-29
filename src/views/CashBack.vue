@@ -32,55 +32,56 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Tabs />
+  <div class="page-container">
+    <Tabs />
 
-  <div v-if="isLoading" class="loading-container">
-    <ProgressSpinner />
-    <p class="loading-text">Loading Cashback Offers...</p>
+    <!-- Content (Loading or Data Table) -->
+    <div class="main-content">
+      <div v-if="isLoading" class="loading-container">
+        <ProgressSpinner />
+        <p class="loading-text">Loading Cashback Offers...</p>
+      </div>
+
+      <div v-if="!isLoading" class="table-container">
+        <h2 class="table-title">Cashback Offers</h2>
+        <div v-if="cashbackData.length === 0" class="no-data">
+          <p>No cashback offers available at the moment.</p>
+        </div>
+        <DataTable :value="cashbackData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
+          responsiveLayout="scroll" class="styled-table">
+          <Column field="favicon" header="Logo">
+            <template #body="slotProps">
+              <img :src="slotProps.data.favicon" :alt="slotProps.data.title" width="20" height="20" />
+            </template>
+          </Column>
+          <Column field="title" header="Store" />
+          <Column field="rate" header="Cashback Rate" />
+          <Column field="link" header="Offer Link">
+            <template #body="slotProps">
+              <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
+            </template>
+          </Column>
+        </DataTable>
+      </div>
+    </div>
+
   </div>
-
-
-  <div v-if="!isLoading" class="table-container">
-    <h2 class="table-title">Cashback Offers</h2>
-    <div v-if="cashbackData.length === 0" class="no-data">
-    <p>No cashback offers available at the moment.</p>
-  </div>
-    <DataTable :value="cashbackData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
-      responsiveLayout="scroll" class="styled-table">
-      <Column field="favicon" header="Logo">
-        <template #body="slotProps">
-          <img :src="slotProps.data.favicon" :alt="slotProps.data.title" width="20" height="20" />
-        </template>
-      </Column>
-      <Column field="title" header="Store" />
-      <Column field="rate" header="Cashback Rate" />
-      <Column field="link" header="Offer Link">
-        <template #body="slotProps">
-          <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
-        </template>
-      </Column>
-    </DataTable>
-  </div>
-
 </template>
-
 <style scoped>
 /* Table Wrapper */
 .table-container {
-
-  margin: 15px auto;
+  flex-direction: column;
   padding: 16px;
   background: white;
-  border-radius: 10px;
+  border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
-  max-width: 1500px;
-  border: 2px solid #ccc;
+  border: 0px solid #ccc;
   transition: 0.3s ease-in-out;
   text-align: center;
-  margin-bottom: 4%;
-  margin-top: 2%;
+
+
 }
 
 /* Table Title */
@@ -209,5 +210,24 @@ onMounted(async () => {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content Section */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Table and Loading Styling */
+.table-container, .loading-container {
+  width: 100%;
+  text-align: center;
 }
 </style>

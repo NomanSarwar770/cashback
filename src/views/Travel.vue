@@ -6,78 +6,89 @@ import Tabs from '@/components/Tabs.vue';
 import { useRoute } from 'vue-router';
 import ProgressSpinner from 'primevue/progressspinner';
 
-
 const giftcardsData = ref([]);
-
 const isLoading = ref(true);
 const route = useRoute();
 const hostname = route.params.store;
 
 onMounted(async () => {
   try {
-    const response = await fetch("https://revroi.oaroulette.com/?action=gift_cards&hostname="+hostname);
+    const response = await fetch(`https://revroi.oaroulette.com/?action=gift_cards&hostname=${hostname}`);
     const data = await response.json();
     giftcardsData.value = data.gift_cards;
   } catch (error) {
     console.error("Error fetching gift cards:", error);
-  }finally {
+  } finally {
     isLoading.value = false;
   }
 });
 </script>
 
 <template>
-  <Tabs />
-  <div v-if="isLoading" class="loading-container">
-    <ProgressSpinner />
-    <p class="loading-text">Loading giftcards Offers...</p>
-  </div>
-  <div v-if="!isLoading" class="table-container">
-    <h2 class="table-title">Gift Card Offers</h2>
-    <div v-if="giftcardsData.length === 0" class="no-data-container">
-      <p class="no-data-text">No data available</p>
+  <div class="page-container">
+    <Tabs />
+
+    <!-- Loading Spinner -->
+    <div class="main-content">
+      <div v-if="isLoading" class="loading-container">
+        <ProgressSpinner />
+        <p class="loading-text">Loading Gift Card Offers...</p>
+      </div>
+
+      <!-- Table Section -->
+      <div v-if="!isLoading" class="table-container">
+        <h2 class="table-title">Gift Card Offers</h2>
+        <div v-if="giftcardsData.length === 0" class="no-data">
+          <p>No gift card offers available at the moment.</p>
+        </div>
+        <DataTable :value="giftcardsData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
+          responsiveLayout="scroll" class="styled-table">
+          <Column field="favicon" header="Logo">
+            <template #body="slotProps">
+              <img :src="slotProps.data.favicon" :alt="slotProps.data.title" width="20" height="20" />
+            </template>
+          </Column>
+          <Column field="title" header="Store" />
+          <Column field="rate" header="Cashback Rate" />
+          <Column field="link" header="Offer Link">
+            <template #body="slotProps">
+              <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
+            </template>
+          </Column>
+        </DataTable>
+      </div>
     </div>
-    <DataTable
-      :value="giftcardsData"
-      paginator
-      :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]"
-      responsiveLayout="scroll"
-      class="styled-table"
-    >
-      <Column field="favicon" header="favicon">
-        <template #body="slotProps">
-          <img v-if="slotProps.data.favicon" :src="slotProps.data.favicon" :alt="slotProps.data.title" width="30" height="30" />
-        </template>
-      </Column>
-      <Column field="title" header="title" />
-      <Column field="rate" header="rate" />
-      <Column field="link" header="link">
-        <template #body="slotProps">
-          <a :href="slotProps.data.link" target="_blank" class="offer-link">Visit Offer</a>
-        </template>
-      </Column>
-    </DataTable>
   </div>
 </template>
 
 <style scoped>
+/* Page Container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh; */
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Table Wrapper */
 .table-container {
-  margin: 15px auto;
+  flex-direction: column;
   padding: 16px;
   background: white;
-  border-radius: 10px;
+  border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
-  max-width: 1500px;
-  border: 2px solid #ccc;
+  border: 0px solid #ccc;
   transition: 0.3s ease-in-out;
   text-align: center;
-  margin-top: 2%;
-  margin-bottom: 4%;
-  min-height: 300px;
 }
 
 /* Table Title */
@@ -91,7 +102,7 @@ onMounted(async () => {
   text-transform: uppercase;
 }
 
-/* Table Base Styling */
+/* Table Styling */
 .styled-table :deep(.p-datatable) {
   border-radius: 8px;
   overflow: hidden;
@@ -110,7 +121,7 @@ onMounted(async () => {
   border: none;
   background: #444;
   color: white;
-  text-transform: lowercase;
+  text-transform: uppercase;
   font-size: 13px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
@@ -136,36 +147,13 @@ onMounted(async () => {
   background-color: #ffffff;
 }
 
-/* Hover Effect - Only Background Color */
+/* Hover Effect */
 .styled-table :deep(.p-datatable-tbody tr:hover) {
   background-color: #e0e0e0;
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Offer Link Styling */
-.offer-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.offer-link:hover {
-  text-decoration: underline;
-}
-
-/* Responsive Table */
-@media (max-width: 768px) {
-  .table-container {
-    width: 95%;
-    max-width: 95%;
-  }
-
-  .styled-table :deep(.p-datatable-thead th),
-  .styled-table :deep(.p-datatable-tbody td) {
-    padding: 6px;
-    font-size: 11px;
-  }
-}
+/* Loading Screen */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -182,4 +170,69 @@ onMounted(async () => {
   color: #333;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-container {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+
+.styled-table :deep(.p-datatable-wrapper) {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+  .styled-table :deep(.p-datatable-thead th),
+  .styled-table :deep(.p-datatable-tbody td) {
+    padding: 6px;
+    font-size: 11px;
+  }
+  .styled-table :deep(.p-datatable) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.styled-table :deep(.p-datatable-wrapper) {
+  margin-bottom: 0 !important;
+}
+
+  .tab.active {
+    color: green;
+    border-bottom: 3px solid green;
+    text-decoration: none;
+  }
+
+  .tabs-container {
+    position: sticky;
+    min-height: 50px;
+    padding: 16px;
+    margin-top: 5vh;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px 0;
+    z-index: 1001;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .tab {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+
+  .tab:hover {
+    color: green;
+    border-bottom: 3px solid green;
+  }
+}
 </style>

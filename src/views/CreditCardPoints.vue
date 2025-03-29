@@ -33,8 +33,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Tabs />
+  <div class="page-container">
+    <Tabs />
 
+    <div class="main-content">
   <div v-if="isLoading" class="loading-container">
     <ProgressSpinner />
     <p class="loading-text">Loading Credit Card/Points Offers...</p>
@@ -64,26 +66,39 @@ onMounted(async () => {
       </Column>
     </DataTable>
   </div>
+  </div>
+</div>
 
 </template>
 
 <style scoped>
+.page-container {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh; */
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Table Wrapper */
 .table-container {
-
-  margin: 15px auto;
+  flex-direction: column;
   padding: 16px;
   background: white;
-  border-radius: 10px;
+  border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
-  max-width: 1500px;
-  border: 2px solid #ccc;
+  border: 0px solid #ccc;
   transition: 0.3s ease-in-out;
   text-align: center;
-  margin-bottom: 4%;
-  margin-top: 2%;
+
 }
 
 /* Table Title */
@@ -97,7 +112,7 @@ onMounted(async () => {
   text-transform: uppercase;
 }
 
-/* Table Base Styling */
+/* Table Styling */
 .styled-table :deep(.p-datatable) {
   border-radius: 8px;
   overflow: hidden;
@@ -142,62 +157,13 @@ onMounted(async () => {
   background-color: #ffffff;
 }
 
-/* Hover Effect - Only Background Color */
+/* Hover Effect */
 .styled-table :deep(.p-datatable-tbody tr:hover) {
   background-color: #e0e0e0;
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Responsive Table */
-@media (max-width: 768px) {
-  .table-container {
-    margin-top: 0;
-    top: 0;
-  }
-
-  .styled-table :deep(.p-datatable-thead th),
-  .styled-table :deep(.p-datatable-tbody td) {
-    padding: 6px;
-    font-size: 11px;
-  }
-
-  .tab.active {
-  color: green;
-  border-bottom: 3px solid green;
-  text-decoration: none;
-}
-.tabs-container {
-  position: sticky;
-  min-height: 50px;
-  margin-top: 5vh;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  padding: 10px 0;
-  z-index: 1001;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.tab {
-  flex-grow: 1;
-  text-align: center;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
-  background-color: white;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
-}
-
-.tab:hover {
-  color: green;
-  border-bottom: 3px solid green;
-}
-
-}
+/* Loading Screen */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -212,5 +178,56 @@ onMounted(async () => {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-container {
+    margin-top: 0;
+    top: 0;
+  }
+
+  .styled-table :deep(.p-datatable-thead th),
+  .styled-table :deep(.p-datatable-tbody td) {
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  .tab.active {
+    color: green;
+    border-bottom: 3px solid green;
+    text-decoration: none;
+  }
+
+  .tabs-container {
+    position: sticky;
+    min-height: 50px;
+    margin-top: 5vh;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px 0;
+    z-index: 1001;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .tab {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+
+  .tab:hover {
+    color: green;
+    border-bottom: 3px solid green;
+  }
 }
 </style>
