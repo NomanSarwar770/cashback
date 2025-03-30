@@ -11,7 +11,6 @@ const travelPointsData = ref([]);
 const isLoading = ref(true);
 
 const columns = ref([
-  { field: 'favicon', header: 'Logo' },
   { field: 'title', header: 'Store' },
   { field: 'rate', header: 'Reward Rate' },
   { field: 'link', header: 'Offer Link' }
@@ -49,76 +48,87 @@ onMounted(async () => {
 
 
   <!-- Travel Points Table -->
-  <div v-if="!isLoading && travelPointsData.length > 0" class="table-container">
-    <h2 class="table-title">Travel Points Rewards Offers</h2>
+  <div v-if="!isLoading" class="full-page-container">
+
     <div v-if="travelPointsData.length === 0" class="no-data">
-    <p>No travel points offers available at the moment.</p>
+
+      <h3>No Travel Points offers available for {{ hostname }} at the moment.</h3>
   </div>
-    <DataTable :value="travelPointsData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
-      responsiveLayout="scroll" class="styled-table">
-      <Column field="favicon" header="Logo">
-        <template #body="slotProps">
-          <img :src="slotProps.data.favicon" :alt="slotProps.data.title" width="20" height="20" />
-        </template>
-      </Column>
-      <Column field="title" header="Store" />
-      <Column field="rate" header="Reward Rate" />
-      <Column field="link" header="Offer Link">
-        <template #body="slotProps">
-          <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
-        </template>
-      </Column>
-    </DataTable>
+
+  <div v-else class="table-container">
+    <h2 class="table-title">
+  Displaying Results for <span class="hostname">{{ hostname }}</span>
+</h2>
+<DataTable :value="travelPointsData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
+            responsiveLayout="scroll" class="styled-table">
+            <Column field="title" header="Store">
+              <template #body="slotProps">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <img :src="slotProps.data.favicon" :alt="slotProps.data.title" width="20" height="20" />
+                  <span>{{ slotProps.data.title }}</span>
+                </div>
+              </template>
+            </Column>
+            <Column field="rate" header="Reward Rate" />
+            <Column field="link" header="Offer Link">
+              <template #body="slotProps">
+                <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
+              </template>
+            </Column>
+          </DataTable>
   </div>
   </div>
+</div>
 </div>
 </template>
 
 <style scoped>
-.page-container {
-  display: flex;
-  flex-direction: column;
-  /* min-height: 100vh; */
-}
-
-/* Main Content */
-.main-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* Table Wrapper */
 .table-container {
-  flex-direction: column;
-  padding: 16px;
   background: white;
-  border-radius: 0;
+  padding: 16px;
+  border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 100%;
-  border: 0px solid #ccc;
-  transition: 0.3s ease-in-out;
+  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  width: 90%;
+  max-width: 1300px;
   text-align: center;
+  margin: 0 auto;
 }
 
 /* Table Title */
 .table-title {
-  color: #444;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  padding: 8px;
-  margin-bottom: 8px;
-  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
-/* Table Styling */
+.full-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw; /* Full viewport width */
+  background-color: #f8f8f8; /* Optional background */
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.hostname {
+  color: green;
+  font-weight: bold;
+}
+
+/* Table Base Styling */
 .styled-table :deep(.p-datatable) {
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
+  max-width: 100%;
+  width: auto; /* Ensure it only takes necessary space */
+}
+.styled-table :deep(.p-datatable-tbody td),
+.styled-table :deep(.p-datatable-thead th) {
+
+  font-size: 16px;
+  min-width: 100px;
 }
 
 /* Table Header */
@@ -149,6 +159,22 @@ onMounted(async () => {
   font-size: 14px;
   color: #333;
 }
+.no-data {
+  margin-top: 0 !important; /* Prevent extra space */
+  padding: 0;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold !important;
+  color: green;
+  width: 90%;
+  max-width: 1300px;
+  margin: 20px auto;
+}
+
 
 /* Alternating Row Colors */
 .styled-table :deep(.p-datatable-tbody tr:nth-child(odd)) {
@@ -159,13 +185,75 @@ onMounted(async () => {
   background-color: #ffffff;
 }
 
-/* Hover Effect */
+/* Hover Effect - Only Background Color */
 .styled-table :deep(.p-datatable-tbody tr:hover) {
   background-color: #e0e0e0;
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Loading Screen */
+/* Responsive Table */
+@media (max-width: 768px) {
+  .table-container {
+    margin-top: 0;
+    top: 0;
+    padding: 35px;
+  }
+
+  .styled-table :deep(.p-datatable-thead th),
+  .styled-table :deep(.p-datatable-tbody td) {
+    padding: 6px;
+    font-size: 11px;
+  }
+  @media (max-width: 768px) {
+  .table-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .styled-table :deep(.p-datatable) {
+    width: 100%; /* Ensure full width within container */
+    overflow-x: auto;
+    margin-bottom: 0 !important;
+  }
+
+  /* Reduce font sizes for mobile */
+  .styled-table :deep(.p-datatable-thead th),
+  .styled-table :deep(.p-datatable-tbody td) {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .styled-table :deep(.p-datatable-tbody tr) {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+}
+.styled-table :deep(.p-datatable-tbody tr:last-child) {
+    margin-bottom: 0 !important;
+  }
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+  .table-container {
+    padding: 5px;
+  }
+
+  .styled-table :deep(.p-datatable) {
+    width: 100%;
+    min-width: 400px; /* Ensures it doesn't shrink too much */
+  }
+
+  /* Stack table cells vertically for better readability */
+  .styled-table :deep(.p-datatable-thead th),
+  .styled-table :deep(.p-datatable-tbody td) {
+    font-size: 11px;
+    padding: 4px;
+  }
+}
+
+}
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -182,55 +270,22 @@ onMounted(async () => {
   color: #333;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .table-container {
-    margin-top: 0;
-    top: 0;
-  }
-
-  .styled-table :deep(.p-datatable-thead th),
-  .styled-table :deep(.p-datatable-tbody td) {
-    padding: 6px;
-    font-size: 11px;
-  }
-
-  .tab.active {
-    color: green;
-    border-bottom: 3px solid green;
-    text-decoration: none;
-  }
-
-  .tabs-container {
-    position: sticky;
-    min-height: 50px;
-    margin-top: 5vh;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    padding: 10px 0;
-    z-index: 1001;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .tab {
-    flex-grow: 1;
-    text-align: center;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    background-color: white;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease-in-out;
-    text-decoration: none;
-  }
-
-  .tab:hover {
-    color: green;
-    border-bottom: 3px solid green;
-  }
+.page-container {
+  display: flex;
+  flex-direction: column;
 }
 
+/* Content Section */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Table and Loading Styling */
+.table-container, .loading-container {
+  width: 100%;
+  text-align: center;
+}
 </style>

@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Menubar from 'primevue/menubar';
 import InputText from 'primevue/inputtext';
-import logo from '../assets/RS Icon.png';
+import logo from '../assets/revlogo.png';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -97,10 +97,22 @@ const toggleMobileMenu = () => {
 }
 
 .logo {
-  height: 50px;
+  height: 20px;
   width: auto;
 }
+@media (max-width: 768px) {
+  .logo {
+    height: 20px;
+    width: auto;
+  }
+}
 
+@media (max-width: 480px) {
+  .logo {
+    height: 20px;
+    width: auto;
+  }
+}
 /* Search Bar */
 .search-container {
   display: flex;
@@ -205,7 +217,8 @@ const toggleMobileMenu = () => {
 
 @media (max-width: 480px) {
   .logo {
-    height: 40px;
+    height: 20px;
+    width: auto;
   }
 
   .search-bar {

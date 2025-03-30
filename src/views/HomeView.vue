@@ -2,9 +2,9 @@
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import Dialog from 'primevue/dialog';
-import img1 from '@/assets/pexels-pixabay-33109.jpg'
-import img2 from '@/assets/pexels-pixabay-326055.jpg'
-import img3 from '@/assets/pexels-pixabay-33545.jpg'
+import img1 from '@/assets/cashback3.jpg'
+import img2 from '@/assets/cashback2.jpg'
+import img3 from '@/assets/cashback1.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
@@ -245,10 +245,11 @@ const prevImages = (type) => {
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 15px;
   margin-bottom: 10px;
   justify-items: center;
+  justify-content: start;
 }
 .image-card {
   text-align: center;
@@ -262,7 +263,7 @@ const prevImages = (type) => {
 
 .image-card img {
   width: 100%;
-  height: auto;
+  height: 80px;
   border-radius: 5px;
 }
 
@@ -473,15 +474,16 @@ const prevImages = (type) => {
 }
 
 .carousel img {
-  width: 100vw;
+  width: auto;
   height: 450px;
-  object-fit: cover;
   margin-top: 0;
 
 }
 
 .carousel-inner {
   width: 100%;
+  height: 450px; /* Adjust to your preferred height */
+  object-fit: cover;
 
 }
 
@@ -496,7 +498,12 @@ const prevImages = (type) => {
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .image-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* Display 2 images in one row on mobile */
+  }
+}
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr); /* Display 2 images in one row on mobile */
   }
 }
 
@@ -523,7 +530,7 @@ const prevImages = (type) => {
 
 @media screen and (max-width: 480px) {
   .image-grid {
-    grid-template-columns: repeat(1, 1fr); /* Single column on very small screens */
+    grid-template-columns: repeat(2, 1fr); /* Single column on very small screens */
   }
 
   .image-card {
@@ -535,5 +542,18 @@ const prevImages = (type) => {
     align-items: flex-start;
   }
 
+}
+.page-number {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: white;
+  transition: 0.3s;
+}
+
+.page-number.active-page {
+  background: green;
+  color: white;
+  font-weight: bold;
 }
 </style>

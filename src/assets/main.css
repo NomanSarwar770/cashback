@@ -106,27 +106,23 @@ a,
   }
 
   /* Make page buttons circular */
-  .p-paginator .p-paginator-pages .p-paginator-page {
-    width: 35px; /* Adjust for size */
-    height: 35px;
-    border-radius: 50% !important; /* Fully rounded */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black !important;
-    color: white !important;
-    border: none;
-    margin: 3px;
+  .p-paginator-page-selected {
+    background-color: black;
+    color: green;
   }
-
   /* Active page button */
   .p-paginator .p-highlight {
     background-color: black !important; /* Blue */
-    color: white !important;
+    color: black;
   }
 
   /* Hover effect */
   .p-paginator .p-paginator-pages .p-paginator-page:hover {
+    background-color: black !important;
+    color: white !important;
+  }
+  /* Hover effect */
+  .p-paginator .p-paginator-pages .p-paginator-page-selected {
     background-color: black !important;
     color: white !important;
   }

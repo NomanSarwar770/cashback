@@ -29,17 +29,20 @@ const tabs = computed(() => [
 .tabs-wrapper {
   display: flex;
   justify-content: center;
+
 }
 .tabs-container {
   margin-top: 100px;
   display: flex;
   background-color: white;
   width: 100%;
-  padding: 10px 10;
+  max-width: 1300px;
   position: relative;
+  padding: 12px 20px;
   left: 0;
   z-index: 999;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .tab {
