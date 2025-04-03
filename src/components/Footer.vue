@@ -8,42 +8,42 @@ import { RouterLink } from 'vue-router';
       <div class="footer-column">
         <h3>About</h3>
         <ul>
-          <li><RouterLink to="/about">Our Story</RouterLink></li>
-          <li><RouterLink to="/team">Team</RouterLink></li>
-          <li><RouterLink to="/careers">Careers</RouterLink></li>
+          <li><RouterLink to="">Our Story</RouterLink></li>
+          <li><RouterLink to="">Team</RouterLink></li>
+          <li><RouterLink to="">Careers</RouterLink></li>
         </ul>
       </div>
 
       <div class="footer-column">
         <h3>Media</h3>
         <ul>
-          <li><RouterLink to="/press">Press Releases</RouterLink></li>
-          <li><RouterLink to="/news">News & Updates</RouterLink></li>
-          <li><RouterLink to="/gallery">Gallery</RouterLink></li>
+          <li><RouterLink to="">Press Releases</RouterLink></li>
+          <li><RouterLink to="">News & Updates</RouterLink></li>
+          <li><RouterLink to="">Gallery</RouterLink></li>
         </ul>
       </div>
 
       <div class="footer-column">
         <h3>Blog</h3>
         <ul>
-          <li><RouterLink to="/blog/latest">Latest Posts</RouterLink></li>
-          <li><RouterLink to="/blog/categories">Categories</RouterLink></li>
-          <li><RouterLink to="/blog/popular">Popular Articles</RouterLink></li>
+          <li><RouterLink to="">Latest Posts</RouterLink></li>
+          <li><RouterLink to="">Categories</RouterLink></li>
+          <li><RouterLink to="">Popular Articles</RouterLink></li>
         </ul>
       </div>
 
       <div class="footer-column">
         <h3>Contact Us</h3>
         <ul>
-          <li>Email: support@cashbackmonitor.com</li>
+          <li>Email: support@revsavings.com</li>
           <li>Phone: +1 (123) 456-7890</li>
-          <li><RouterLink to="/contact">Contact Form</RouterLink></li>
+          <li><RouterLink to="">Contact Form</RouterLink></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      Copyright © 2025-2026 revsavings.com, A Yansonic Website
+      Copyright © 2025 revsavings.com, A Yansonic Website
     </div>
   </footer>
 </template>

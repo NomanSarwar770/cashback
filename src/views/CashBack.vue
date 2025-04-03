@@ -44,18 +44,16 @@ watch(() => route.params.store, (newStore, oldStore) => {
  <div class="page-container">
     <Tabs />
 
-    <!-- Content (Loading or Data Table) -->
     <div class="main-content">
-      <div v-if="isLoading" class="loading-container">
+      <div v-if="isLoading" class="full-page-container">
         <ProgressSpinner />
         <p class="loading-text">Loading Cashback Offers...</p>
       </div>
 
-      <div v-if="!isLoading" class="full-page-container">
+      <div v-show="!isLoading" class="full-page-container">
 
 
-        <div v-if="cashbackData.length === 0" class="no-data">
-          <h3>No cashback offers available for {{ hostname }} at the moment.</h3>
+        <div v-if="cashbackData.length === 0" class="no-data"><h3>🚀 Oops! No cashback offers available for <span class="hostname">{{ hostname }}</span> right now. Stay tuned for updates! 🔔</h3>
         </div>
 
         <div v-else class="table-container">
@@ -96,7 +94,7 @@ watch(() => route.params.store, (newStore, oldStore) => {
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  overflow-x: auto;
   width: 90%;
   max-width: 1300px;
   text-align: center;
@@ -114,8 +112,10 @@ watch(() => route.params.store, (newStore, oldStore) => {
 .full-page-container {
   display: flex;
   flex-direction: column;
-  width: 100vw; /* Full viewport width */
-  background-color: #f8f8f8; /* Optional background */
+  width: 100vw;
+  background-color: #f8f8f8;
+  padding: 0;
+  min-height: 500px;
 }
 html, body {
   margin: 0;
@@ -129,7 +129,7 @@ html, body {
 /* Table Base Styling */
 .styled-table :deep(.p-datatable) {
   max-width: 100%;
-  width: auto; /* Ensure it only takes necessary space */
+  width: auto;
 }
 .styled-table :deep(.p-datatable-tbody td),
 .styled-table :deep(.p-datatable-thead th) {
@@ -167,22 +167,21 @@ html, body {
   color: #333;
 }
 .no-data {
-  margin-top: 0 !important; /* Prevent extra space */
+  margin-top: 0 !important;
   padding: 0;
   background: white;
-  padding: 20px;
+  padding-top: 100px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 18px;
   font-weight: bold !important;
   color: green;
-  width: 90%;
-  max-width: 1300px;
-  margin: 20px auto;
+  width: 100%;
+  margin-top: 20px;
+  min-height: 500px;
 }
 
-/* Alternating Row Colors */
 .styled-table :deep(.p-datatable-tbody tr:nth-child(odd)) {
   background-color: #f5f5f5;
 }
@@ -190,8 +189,6 @@ html, body {
 .styled-table :deep(.p-datatable-tbody tr:nth-child(even)) {
   background-color: #ffffff;
 }
-
-/* Hover Effect - Only Background Color */
 .styled-table :deep(.p-datatable-tbody tr:hover) {
   background-color: #e0e0e0;
   transition: background-color 0.3s ease-in-out;
@@ -248,10 +245,9 @@ html, body {
 
   .styled-table :deep(.p-datatable) {
     width: 100%;
-    min-width: 400px; /* Ensures it doesn't shrink too much */
+    min-width: 400px;
   }
 
-  /* Stack table cells vertically for better readability */
   .styled-table :deep(.p-datatable-thead th),
   .styled-table :deep(.p-datatable-tbody td) {
     font-size: 11px;
@@ -266,7 +262,7 @@ html, body {
   justify-content: center;
   height: 50vh;
   text-align: center;
-  height: 200px;
+
 }
 
 
@@ -275,6 +271,7 @@ html, body {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  text-align: center;
 }
 
 .page-container {
@@ -288,11 +285,25 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 }
 
 /* Table and Loading Styling */
 .table-container, .loading-container {
   width: 100%;
   text-align: center;
+}
+@media (max-width: 768px) {
+  .full-page-container {
+    min-height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .no-data {
+    min-height: 10vh;
+    font-size: 16px;
+    padding: 30px;
+
+  }
 }
 </style>

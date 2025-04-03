@@ -30,6 +30,8 @@ const tabs = computed(() => [
   display: flex;
   justify-content: center;
 
+
+
 }
 .tabs-container {
   margin-top: 100px;

@@ -13,7 +13,6 @@ const handleSubmit = () => {
   router.push({ path: `/cashback/${searchQuery.value}` });
 };
 
-// Toggle mobile menu
 const toggleMobileMenu = () => {
   isMobileMenuVisible.value = !isMobileMenuVisible.value;
 };
@@ -22,7 +21,7 @@ const toggleMobileMenu = () => {
 <template>
   <header class="header-container">
     <Menubar class="full-width-navbar">
-      <!-- Left Section: Logo -->
+
       <template #start>
         <div class="left-section">
           <router-link to="/">
@@ -31,12 +30,12 @@ const toggleMobileMenu = () => {
         </div>
       </template>
 
-      <!-- Desktop Search Bar (Hidden in Mobile) -->
+      <!-- Desktop Search Bar-->
       <template #end>
         <form @submit.prevent="handleSubmit" class="search-container desktop-search">
           <div class="search-wrapper">
             <InputText v-model="searchQuery" placeholder="Search Store here" type="text" class="search-bar" />
-            <i class="pi pi-search search-icon"></i>
+            <i class="pi pi-search search-icon" @click="handleSubmit"></i>
           </div>
         </form>
 
@@ -49,11 +48,10 @@ const toggleMobileMenu = () => {
 
     <!-- Mobile Dropdown Menu -->
     <div v-if="isMobileMenuVisible" class="mobile-menu">
-      <!-- Search Bar inside Mobile Menu -->
       <form @submit.prevent="handleSubmit" class="search-container mobile-search">
         <div class="search-wrapper">
           <InputText v-model="searchQuery" placeholder="Search Store here" type="text" class="search-bar" />
-          <i class="pi pi-search search-icon"></i>
+          <i class="pi pi-search search-icon" @click="handleSubmit"></i>
         </div>
       </form>
 <!--
@@ -77,20 +75,19 @@ const toggleMobileMenu = () => {
 
 /* Menubar Full Width */
 .full-width-navbar {
-  width: 100%; /* Ensures full width */
-  max-width: 1350px; /* Slightly larger max width for balance */
-  margin: 0 auto; /* Centers the navbar */
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
   height: 70px;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5px; /* Reduce padding further */
+  padding: 0 5px;
 
-  box-shadow: none; /* Removes any shadow effect */
-  border: none; /* Ensures no borders */
+  box-shadow: none;
+  border: none;
 }
-/* Left Section - Logo */
 .left-section {
   display: flex;
   align-items: center;
@@ -187,29 +184,24 @@ const toggleMobileMenu = () => {
   background-color: #f0f0f0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  /* Adjust Navbar Layout */
+
   .full-width-navbar {
     padding: 0 10px;
   }
 
-  /* Adjust Search Bar Width */
   .search-bar {
     width: 180px;
   }
 
-  /* Show Mobile Menu Button */
   .mobile-menu-button {
     display: block;
   }
 
-  /* Hide Search Bar on Small Screens */
   .search-container {
     display: none;
   }
 
-  /* Show Mobile Menu when active */
   .mobile-menu {
     display: block;
   }
@@ -225,7 +217,6 @@ const toggleMobileMenu = () => {
     width: 150px;
   }
 }
-/* Hide Search Bar on Mobile in Navbar */
 .desktop-search {
   display: flex;
 }
@@ -234,18 +225,16 @@ const toggleMobileMenu = () => {
   display: none;
 }
 
-/* Show Search in Mobile Menu */
 @media (max-width: 768px) {
   .desktop-search {
-    display: none; /* Hide in navbar */
+    display: none;
   }
 
   .mobile-search {
-    display: block; /* Show in mobile menu */
+    display: block;
     padding: 10px;
   }
 
-  /* Adjust Search Bar Width */
   .search-bar {
     width: 100%;
   }

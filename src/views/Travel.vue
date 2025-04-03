@@ -30,17 +30,16 @@ onMounted(async () => {
 
     <!-- Loading Spinner -->
     <div class="main-content">
-      <div v-if="isLoading" class="loading-container">
+      <div v-if="isLoading" class="full-page-container">
         <ProgressSpinner />
         <p class="loading-text">Loading Gift Card Offers...</p>
       </div>
 
       <!-- Table Section -->
-      <div v-if="!isLoading" class="full-page-container">
+      <div v-show="!isLoading" class="full-page-container">
 
         <div v-if="giftcardsData.length === 0" class="no-data">
-
-          <h3>No Gift Card offers available for {{ hostname }} at the moment.</h3>
+          <h3>🚀 Oops! No Gift Card offers available for <span class="hostname">{{ hostname }}</span> right now. Stay tuned for updates! 🔔</h3>
         </div>
         <div v-else class="table-container">
           <h2 class="table-title">
@@ -88,8 +87,10 @@ onMounted(async () => {
 .full-page-container {
   display: flex;
   flex-direction: column;
-  width: 100vw; /* Full viewport width */
-  background-color: #f8f8f8; /* Optional background */
+  width: 100vw;
+  background-color: #f8f8f8;
+  padding: 0;
+  min-height: 500px;
 }
 html, body {
   margin: 0;
@@ -141,19 +142,19 @@ html, body {
   color: #333;
 }
 .no-data {
-  margin-top: 0 !important; /* Prevent extra space */
+  margin-top: 0 !important;
   padding: 0;
   background: white;
-  padding: 20px;
+  padding-top: 100px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 18px;
   font-weight: bold !important;
   color: green;
-  width: 90%;
-  max-width: 1300px;
-  margin: 20px auto;
+  width: 100%;
+  margin-top: 20px;
+  min-height: 500px;
 }
 
 /* Alternating Row Colors */
@@ -248,6 +249,7 @@ html, body {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  text-align: center;
 }
 
 .page-container {
@@ -267,5 +269,18 @@ html, body {
 .table-container, .loading-container {
   width: 100%;
   text-align: center;
+}
+@media (max-width: 768px) {
+  .full-page-container {
+    min-height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .no-data {
+    min-height: 10vh;
+    font-size: 16px;
+    padding: 30px;
+
+  }
 }
 </style>

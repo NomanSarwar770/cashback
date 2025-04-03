@@ -103,7 +103,7 @@ const prevImages = (type) => {
       <div class="image-grid">
         <div
           v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
-          :key="store.id" class="image-card">
+          :key="store.id" class="image-card" >
           <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
   <img :src="store.image" :alt="store.name" />
 </RouterLink>
@@ -114,7 +114,9 @@ const prevImages = (type) => {
       <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores" :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
           <div v-for="store in mostViewedStores" :key="store.id" class="dialog-image-card">
-            <img :src="store.image" :alt="store.name" />
+            <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
+              <img :src="store.image" :alt="store.name" />
+            </RouterLink>
             <p>{{ store.name }}</p>
           </div>
         </div>
@@ -155,7 +157,9 @@ const prevImages = (type) => {
       <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward" :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
           <div v-for="store in sortedByRewardStores" :key="store.id" class="dialog-image-card">
-            <img :src="store.image" :alt="store.name" />
+            <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
+              <img :src="store.image" :alt="store.name" />
+            </RouterLink>
             <p>{{ store.name }}</p>
           </div>
         </div>
@@ -482,7 +486,7 @@ const prevImages = (type) => {
 
 .carousel-inner {
   width: 100%;
-  height: 450px; /* Adjust to your preferred height */
+  height: 450px;
   object-fit: cover;
 
 }
@@ -495,15 +499,14 @@ const prevImages = (type) => {
 .carousel-slider {
   margin-top: 0px;
 }
-/* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .image-grid {
-    grid-template-columns: repeat(2, 1fr); /* Display 2 images in one row on mobile */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 768px) {
   .image-grid {
-    grid-template-columns: repeat(2, 1fr); /* Display 2 images in one row on mobile */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -512,14 +515,15 @@ const prevImages = (type) => {
     font-size: 20px;
   }
 
+
   .see-all-link {
     font-size: 14px;
-    margin: 10px auto; /* Centers it */
+    margin: 10px auto;
     display: block;
   }
 
   .image-grid {
-    grid-template-columns: repeat(2, 1fr); /* Two columns on small screens */
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
@@ -530,12 +534,13 @@ const prevImages = (type) => {
 
 @media screen and (max-width: 480px) {
   .image-grid {
-    grid-template-columns: repeat(2, 1fr); /* Single column on very small screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .image-card {
     max-width: 120px;
   }
+
 
   .title-container {
     flex-direction: column;
@@ -555,5 +560,18 @@ const prevImages = (type) => {
   background: green;
   color: white;
   font-weight: bold;
+}
+
+
+
+@media (max-width: 767px) {
+  .dialog-image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dialog-image-card img {
+    width: 100%;
+    height:80px;
+  }
 }
 </style>
