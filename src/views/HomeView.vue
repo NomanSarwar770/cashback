@@ -2,9 +2,9 @@
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import Dialog from 'primevue/dialog';
-import img1 from '@/assets/cashback3.jpg'
-import img2 from '@/assets/cashback2.jpg'
-import img3 from '@/assets/cashback1.jpg'
+import img1 from '@/assets/pexels-pixabay-33109.jpg'
+import img2 from '@/assets/pexels-pixabay-33545.jpg'
+import img3 from '@/assets/pexels-pixabay-326055.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
