@@ -36,7 +36,7 @@ onMounted(async () => {
     <Tabs />
 
     <div class="main-content">
-  <div v-if="isLoading" class="full-page-container">
+  <div v-if="isLoading" id= "mani" class="full-page-container">
     <ProgressSpinner />
     <p class="loading-text">Loading Credit Card/Points Offers...</p>
   </div>
@@ -85,9 +85,9 @@ onMounted(async () => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: auto;
   width: 90%;
-  max-width: 1300px;
+  max-width: 1290px;
   text-align: center;
-  margin: 0 auto;
+  margin-left: 109px;
 }
 
 /* Table Title */
@@ -104,7 +104,12 @@ onMounted(async () => {
   width: 100vw;
   background-color: #f8f8f8;
   padding: 0;
+  text-align: center;
   min-height: 500px;
+}
+
+#mani {
+  justify-content: center;
 }
 html, body {
   margin: 0;
@@ -256,6 +261,20 @@ html, body {
   .styled-table :deep(.p-datatable-tbody td) {
     font-size: 11px;
     padding: 4px;
+  }
+}
+@media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 10px;
   }
 }
 

@@ -38,13 +38,17 @@ const tabs = computed(() => [
   display: flex;
   background-color: white;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1290px;
   position: relative;
   padding: 12px 20px;
-  left: 0;
   z-index: 999;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
+}
+@media (min-width: 1024px) {
+  .tabs-container {
+    margin-right: 10px;
+  }
 }
 
 .tab {

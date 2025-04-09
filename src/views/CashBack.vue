@@ -95,10 +95,10 @@ watch(() => route.params.store, (newStore, oldStore) => {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: auto;
-  width: 90%;
-  max-width: 1300px;
+  width: 100%;
+  max-width: 1290px;
   text-align: center;
-  margin: 0 auto;
+  margin-left: 109px;
 }
 
 /* Table Title */
@@ -109,13 +109,16 @@ watch(() => route.params.store, (newStore, oldStore) => {
   margin-bottom: 16px;
 }
 
+
 .full-page-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100vw;
   background-color: #f8f8f8;
   padding: 0;
   min-height: 500px;
+  text-align: center;
 }
 html, body {
   margin: 0;
@@ -207,6 +210,20 @@ html, body {
     padding: 6px;
     font-size: 11px;
   }
+  @media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 10px;
+  }
+}
   @media (max-width: 768px) {
   .table-container {
     width: 100%;

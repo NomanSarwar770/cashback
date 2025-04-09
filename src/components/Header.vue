@@ -61,6 +61,10 @@ const toggleMobileMenu = () => {
 </template>
 
 <style scoped>
+
+.search-wrapper {
+  margin-left: 10px;
+}
 /* Navbar Container */
 .header-container {
   width: 100%;
@@ -76,7 +80,7 @@ const toggleMobileMenu = () => {
 /* Menubar Full Width */
 .full-width-navbar {
   width: 100%;
-  max-width: 1350px;
+  max-width: 1320px;
   margin: 0 auto;
   height: 70px;
   background-color: white;

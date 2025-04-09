@@ -30,7 +30,7 @@ onMounted(async () => {
 
     <!-- Loading Spinner -->
     <div class="main-content">
-      <div v-if="isLoading" class="full-page-container">
+      <div v-if="isLoading" id="mani" class="full-page-container">
         <ProgressSpinner />
         <p class="loading-text">Loading Gift Card Offers...</p>
       </div>
@@ -69,13 +69,27 @@ onMounted(async () => {
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  overflow-x: auto;
   width: 90%;
-  max-width: 1300px;
+  max-width: 1290px;
   text-align: center;
-  margin: 0 auto;
+  margin-left: 109px;
 }
 
+@media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 10px;
+  }
+}
 /* Table Title */
 .table-title {
   text-align: center;
@@ -90,7 +104,12 @@ onMounted(async () => {
   width: 100vw;
   background-color: #f8f8f8;
   padding: 0;
+  margin-top: 0;
   min-height: 500px;
+}
+
+#mani {
+  justify-content: center;
 }
 html, body {
   margin: 0;

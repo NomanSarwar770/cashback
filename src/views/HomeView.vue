@@ -2,9 +2,9 @@
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import Dialog from 'primevue/dialog';
-import img1 from '@/assets/pexels-pixabay-33109.jpg'
-import img2 from '@/assets/pexels-pixabay-33545.jpg'
-import img3 from '@/assets/pexels-pixabay-326055.jpg'
+import img1 from '@/assets/Slider 1.png'
+import img2 from '@/assets/Slider 3.png'
+import img3 from '@/assets/Slider 2.png'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
@@ -73,12 +73,14 @@ const prevImages = (type) => {
           alt="Slide 1">
       </div>
       <div class="carousel-item">
-        <img :src="img2" class="d-block w-100"
-          alt="Slide 2">
+    <img :src="img2" class="d-block w-100" alt="Slide 2">
       </div>
       <div class="carousel-item">
-        <img :src="img3" class="d-block w-100"
+        <a href="https://www.google.com" target="_blank" rel="">
+          <img :src="img3" class="d-block w-100"
           alt="Slide 3">
+        </a>
+
       </div>
     </div>
 
@@ -213,7 +215,9 @@ const prevImages = (type) => {
 
 .row {
   width: 100%;
+  max-width: 1430px;
   padding: 20px;
+  margin-left: 10px;
   margin-bottom: 0px;
   background: white;
   border-radius: 10px;
@@ -250,7 +254,7 @@ const prevImages = (type) => {
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
+  gap: 0;
   margin-bottom: 10px;
   justify-items: center;
   justify-content: start;
@@ -479,14 +483,14 @@ const prevImages = (type) => {
 
 .carousel img {
   width: auto;
-  height: 450px;
+  height: 550px;
   margin-top: 0;
 
 }
 
 .carousel-inner {
   width: 100%;
-  height: 450px;
+  height: 550px;
   object-fit: cover;
 
 }
