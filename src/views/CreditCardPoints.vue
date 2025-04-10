@@ -5,6 +5,7 @@ import Column from 'primevue/column';
 import Tabs from '@/components/Tabs.vue';
 import { useRoute } from 'vue-router';
 import ProgressSpinner from 'primevue/progressspinner';
+import { Button } from 'primevue';
 
 const creditPointsData = ref([]);
 const isLoading = ref(true);
@@ -65,7 +66,9 @@ onMounted(async () => {
             <Column field="points" header="Credit Points" />
             <Column field="link" header="Offer Link">
               <template #body="slotProps">
-                <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
+                <a :href="slotProps.data.link" target="_blank" style="text-decoration: none;">
+      <Button class=" p-button-sm" label="Visit Offer" icon="pi pi-link" />
+    </a>
               </template>
             </Column>
           </DataTable>
@@ -83,7 +86,7 @@ onMounted(async () => {
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
+  overflow-x: hidden;
   width: 90%;
   max-width: 1290px;
   text-align: center;

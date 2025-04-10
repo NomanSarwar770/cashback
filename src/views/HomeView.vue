@@ -19,7 +19,9 @@ const stores = ref([
   { id: 7, name: 'Samsung', image: new URL('../assets/samsung.jpg', import.meta.url).href, reward: 4 },
   { id: 8, name: 'Ultra', image: new URL('../assets/ultra.png', import.meta.url).href, reward: 5 },
   { id: 9, name: 'Lenovo', image: new URL('../assets/lenovo.png', import.meta.url).href, reward: 4 },
-  { id: 10, name: 'eBay', image: new URL('../assets/ebay.png', import.meta.url).href, reward: 3 },
+  { id: 10, name: 'Athleta', image: new URL('../assets/athleta.png', import.meta.url).href, reward: 4 },
+  { id: 11, name: 'eBay', image: new URL('../assets/ebay.png', import.meta.url).href, reward: 3 },
+  { id: 12, name: 'Mac', image: new URL('../assets/mac.jpg', import.meta.url).href, reward: 6 },
 ]);
 
 
@@ -97,9 +99,9 @@ const prevImages = (type) => {
   <div class="container px-0">
     <!-- The Most Viewed Stores -->
     <div class="row gx-0 px-0">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="">The Most Viewed Stores</h2>
-        <a href="#" @click.prevent="showMostViewedDialog = true" class="btn btn-sm btn-light">See All</a>
+      <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
+        <h2 class="mb-0 fs-5 fs-md-3">The Most Viewed Stores</h2>
+        <a href="#" @click.prevent="showMostViewedDialog = true" class="btn btn-sm btn-light fw-bold text-dark">See All</a>
       </div>
       <div class="image-grid">
         <div
@@ -125,22 +127,28 @@ const prevImages = (type) => {
       </Dialog>
 
       <div class="pagination">
-        <button @click="prevImages('mostViewed')" :disabled="startIndexMostViewed === 0" class="image-buttonp">
+        <!-- <button @click="prevImages('mostViewed')" :disabled="startIndexMostViewed === 0" class="image-buttonp">
           <img src="@/assets/back.png" alt="Previous" />
         </button>
         <button @click="nextImages('mostViewed')" :disabled="startIndexMostViewed + imagesPerPage >= stores.length"
           class="image-button">
           <img src="@/assets/next.png" alt="Next" />
-        </button>
+        </button> -->
+        <Button @click="prevImages('mostViewed')" :disabled="startIndexMostViewed === 0" icon="pi pi-arrow-left"
+          severity="primary" rounded aria-label="Previous" class="me-3" />
+
+        <Button @click="nextImages('mostViewed')"
+          :disabled="startIndexMostViewed + imagesPerPage >= stores.length" icon="pi pi-arrow-right"
+          severity="primary" rounded aria-label="Next" />
       </div>
     </div>
 
     <!-- Stores Sorted by Reward -->
-    <div class="row gx-0 px-0 content-row">
-      <div class="title-container">
-        <h2 class="title">Stores Sorted by Reward</h2>
-        <a href="#" @click.prevent="showSortedByRewardDialog = true" class="see-all-link">
-          {{ showAllSortedByReward ? 'Show Less' : 'See All' }}
+    <div class="row gx-0 px-0">
+      <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
+        <h2 class="mb-0 fs-5 fs-md-3">Stores Sorted by Reward</h2>
+        <a href="#" @click.prevent="showSortedByRewardDialog = true" class="btn btn-sm btn-light fw-bold text-dark">
+          See All
         </a>
       </div>
 
@@ -178,11 +186,11 @@ const prevImages = (type) => {
           <img src="@/assets/next.png" alt="Next" />
         </button> -->
         <Button @click="prevImages('sortedByReward')" :disabled="startIndexSortedByReward === 0" icon="pi pi-arrow-left"
-          severity="secondary" rounded aria-label="Previous" class="me-3" />
+          severity="primary" rounded aria-label="Previous" class="me-3" />
 
         <Button @click="nextImages('sortedByReward')"
           :disabled="startIndexSortedByReward + imagesPerPage >= stores.length" icon="pi pi-arrow-right"
-          severity="secondary" rounded aria-label="Next" />
+          severity="primary" rounded aria-label="Next" />
       </div>
     </div>
 
@@ -249,7 +257,7 @@ const prevImages = (type) => {
 .image-grid {
   display: flex;
     flex-wrap: wrap;
-  
+
     align-items: center;
     justify-content: space-between;
     /* grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
@@ -265,6 +273,7 @@ const prevImages = (type) => {
   width: 100%;
   max-width: 150px;
 }
+
 
 .image-card img {
   width: 100%;
@@ -355,8 +364,21 @@ const prevImages = (type) => {
 }
 
 .ad-banner {
+
   max-height: 150px;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .ad-banner {
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 0;
+  }
+  .table-card {
+    min-height: 0;
+  }
 }
 
 .dialog-image-grid {
@@ -475,14 +497,13 @@ const prevImages = (type) => {
 }
 
 .carousel-img {
-  height: 500px; /* or whatever height you're using */
+  height: 500px;
   object-fit: cover;
   object-position: center;
 }
 
 .carousel-inner {
   width: 100%;
-  height: 650px;
   object-fit: cover;
 
 }
@@ -570,4 +591,5 @@ const prevImages = (type) => {
     height:80px;
   }
 }
+
 </style>

@@ -5,6 +5,7 @@ import Column from 'primevue/column';
 import Tabs from '@/components/Tabs.vue';
 import { useRoute } from 'vue-router';
 import ProgressSpinner from 'primevue/progressspinner';
+import { Button } from 'primevue';
 
 const cashbackData = ref([]);
 const isLoading = ref(true);
@@ -77,8 +78,10 @@ watch(() => route.params.store, (newStore, oldStore) => {
 
   <Column field="link" header="Offer Link" style="width: 20%;">
     <template #body="slotProps">
-      <a :href="slotProps.data.link" target="_blank">Visit Offer</a>
-    </template>
+      <a :href="slotProps.data.link" target="_blank" style="text-decoration: none;">
+      <Button class=" p-button-sm" label="Visit Offer" icon="pi pi-link" />
+    </a>
+  </template>
   </Column>
 
 </DataTable>
@@ -94,15 +97,13 @@ watch(() => route.params.store, (newStore, oldStore) => {
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: none;
+  overflow-x: hidden;
   width: 100%;
   max-width: 1290px;
   text-align: center;
   margin: auto;
   margin-bottom: 50px;
 }
-
-/* Table Title */
 .table-title {
   text-align: center;
   font-size: 20px;
@@ -170,6 +171,7 @@ html, body {
   font-size: 14px;
   color: #333;
 }
+
 .no-data {
   margin-top: 0 !important;
   padding: 0;
@@ -334,6 +336,14 @@ html, body {
     font-size: 16px;
     padding: 30px;
 
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .visit-offer-btn {
+    width: 100%;
+    margin: 10px 0;
   }
 }
 </style>
