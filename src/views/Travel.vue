@@ -73,7 +73,9 @@ onMounted(async () => {
   width: 90%;
   max-width: 1290px;
   text-align: center;
-  margin-left: 109px;
+  margin: auto;
+  min-height: 500px;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 768px) {

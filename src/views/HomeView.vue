@@ -481,16 +481,15 @@ const prevImages = (type) => {
   margin-top: 75px;
 }
 
-.carousel img {
-  width: auto;
-  height: 550px;
-  margin-top: 0;
-
+.carousel-img {
+  height: 500px; /* or whatever height you're using */
+  object-fit: cover;
+  object-position: center;
 }
 
 .carousel-inner {
   width: 100%;
-  height: 550px;
+  height: 650px;
   object-fit: cover;
 
 }

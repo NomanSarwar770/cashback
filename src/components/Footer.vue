@@ -43,7 +43,7 @@ import { RouterLink } from 'vue-router';
     </div>
 
     <div class="footer-bottom">
-      Copyright © 2025 revsavings.com, A Yansonic Website
+      Copyright © 2025 revsavings.com
     </div>
   </footer>
 </template>

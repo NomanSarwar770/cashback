@@ -47,7 +47,7 @@ const tabs = computed(() => [
 }
 @media (min-width: 1024px) {
   .tabs-container {
-    margin-right: 10px;
+    margin-right: 0;
   }
 }
 

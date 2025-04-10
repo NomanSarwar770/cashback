@@ -94,11 +94,12 @@ watch(() => route.params.store, (newStore, oldStore) => {
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
+  overflow-x: none;
   width: 100%;
   max-width: 1290px;
   text-align: center;
-  margin-left: 109px;
+  margin: auto;
+  margin-bottom: 50px;
 }
 
 /* Table Title */
@@ -222,6 +223,18 @@ html, body {
     margin-left: auto !important;
     margin-right: auto !important;
     padding: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .table-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 10px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .table-container {
+    margin-left: 140px;
   }
 }
   @media (max-width: 768px) {
