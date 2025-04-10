@@ -108,7 +108,11 @@ watch(() => route.params.store, (newStore, oldStore) => {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 
