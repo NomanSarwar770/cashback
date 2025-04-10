@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import img1 from '@/assets/Slider 1.png'
 import img2 from '@/assets/Slider 3.png'
@@ -69,16 +70,14 @@ const prevImages = (type) => {
 
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img :src="img1" class="d-block w-100"
-          alt="Slide 1">
+        <img :src="img1" class="d-block w-100" alt="Slide 1">
       </div>
       <div class="carousel-item">
-    <img :src="img2" class="d-block w-100" alt="Slide 2">
+        <img :src="img2" class="d-block w-100" alt="Slide 2">
       </div>
       <div class="carousel-item">
         <a href="https://www.google.com" target="_blank" rel="">
-          <img :src="img3" class="d-block w-100"
-          alt="Slide 3">
+          <img :src="img3" class="d-block w-100" alt="Slide 3">
         </a>
 
       </div>
@@ -94,26 +93,27 @@ const prevImages = (type) => {
   </div>
 
 
-  <div class="full-width-page">
-    <!-- The Most Viewed Stores -->
-    <div class="row">
-      <div class="title-container">
-        <h2 class="title">The Most Viewed Stores</h2>
-        <a href="#" @click.prevent="showMostViewedDialog = true" class="see-all-link">See All</a>
-      </div>
 
+  <div class="container px-0">
+    <!-- The Most Viewed Stores -->
+    <div class="row gx-0 px-0">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="">The Most Viewed Stores</h2>
+        <a href="#" @click.prevent="showMostViewedDialog = true" class="btn btn-sm btn-light">See All</a>
+      </div>
       <div class="image-grid">
         <div
           v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
-          :key="store.id" class="image-card" >
+          :key="store.id" class="image-card">
           <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
-  <img :src="store.image" :alt="store.name" />
-</RouterLink>
+            <img :src="store.image" :alt="store.name" />
+          </RouterLink>
           <p>{{ store.name }}</p>
         </div>
       </div>
       <!-- Most Viewed Stores Dialog -->
-      <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores" :style="{ width: '80vw', height: '80vh' }">
+      <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores"
+        :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
           <div v-for="store in mostViewedStores" :key="store.id" class="dialog-image-card">
             <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
@@ -136,7 +136,7 @@ const prevImages = (type) => {
     </div>
 
     <!-- Stores Sorted by Reward -->
-    <div class="row content-row">
+    <div class="row gx-0 px-0 content-row">
       <div class="title-container">
         <h2 class="title">Stores Sorted by Reward</h2>
         <a href="#" @click.prevent="showSortedByRewardDialog = true" class="see-all-link">
@@ -149,14 +149,15 @@ const prevImages = (type) => {
           v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
           :key="store.id" class="image-card">
           <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
-  <img :src="store.image" :alt="store.name" />
-</RouterLink>
+            <img :src="store.image" :alt="store.name" />
+          </RouterLink>
           <p>{{ store.name }}</p>
         </div>
       </div>
 
       <!-- Stores Sorted by Reward Dialog -->
-      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward" :style="{ width: '80vw', height: '80vh' }">
+      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward"
+        :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
           <div v-for="store in sortedByRewardStores" :key="store.id" class="dialog-image-card">
             <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
@@ -168,19 +169,26 @@ const prevImages = (type) => {
       </Dialog>
 
       <div class="pagination">
-        <button @click="prevImages('sortedByReward')" :disabled="startIndexSortedByReward === 0" class="image-buttonp">
+        <!-- <button @click="prevImages('sortedByReward')" :disabled="startIndexSortedByReward === 0" class="image-buttonp">
           <img src="@/assets/back.png" alt="Previous" />
-        </button>
-        <button @click="nextImages('sortedByReward')"
-          :disabled="startIndexSortedByReward + imagesPerPage >= stores.length" class="image-button">
+        </button> -->
+        <!-- <button @click="nextImages('sortedByReward')"
+          :disabled="startIndexSortedByReward + imagesPerPage >= stores.length"
+          class=" image-button btn btn-sm btn-light rounded">
           <img src="@/assets/next.png" alt="Next" />
-        </button>
+        </button> -->
+        <Button @click="prevImages('sortedByReward')" :disabled="startIndexSortedByReward === 0" icon="pi pi-arrow-left"
+          severity="secondary" rounded aria-label="Previous" class="me-3" />
+
+        <Button @click="nextImages('sortedByReward')"
+          :disabled="startIndexSortedByReward + imagesPerPage >= stores.length" icon="pi pi-arrow-right"
+          severity="secondary" rounded aria-label="Next" />
       </div>
     </div>
 
 
     <!-- Related Links & Advertisement -->
-    <div class="row content-row">
+    <div class="row content-row gx-0 px-0  mb-5">
 
       <!-- <div class="table-card">
         <h3 class="related-linkss">Related Links</h3>
@@ -208,17 +216,11 @@ const prevImages = (type) => {
 </template>
 
 <style scoped>
-.full-width-page {
-  width: 100%;
-  padding: 20px;
-}
-
 .row {
   width: 100%;
   max-width: 1430px;
   padding: 20px;
-  margin-left: 10px;
-  margin-bottom: 0px;
+  margin: 10px auto 0 auto;
   background: white;
   border-radius: 10px;
 
@@ -244,20 +246,15 @@ const prevImages = (type) => {
   margin-bottom: 15px;
 
 }
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-left: 40px;
-}
-
 .image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0;
+  display: flex;
+    flex-wrap: wrap;
+  
+    align-items: center;
+    justify-content: space-between;
+    /* grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
+    /* gap: 0; */
   margin-bottom: 10px;
-  justify-items: center;
-  justify-content: start;
 }
 .image-card {
   text-align: center;
@@ -329,9 +326,6 @@ const prevImages = (type) => {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   min-height: 200px;
-  margin-left: 40px;
-  margin-right: 30px;
-
 }
 
 
@@ -361,7 +355,6 @@ const prevImages = (type) => {
 }
 
 .ad-banner {
-  width: 100%;
   max-height: 150px;
   border-radius: 10px;
 }

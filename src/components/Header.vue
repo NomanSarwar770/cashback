@@ -19,9 +19,8 @@ const toggleMobileMenu = () => {
 </script>
 
 <template>
-  <header class="header-container">
-    <Menubar class="full-width-navbar">
-
+  <header class="header-container w-100">
+    <Menubar class="full-width-navbar container">
       <template #start>
         <div class="left-section">
           <router-link to="/">
@@ -54,7 +53,7 @@ const toggleMobileMenu = () => {
           <i class="pi pi-search search-icon" @click="handleSubmit"></i>
         </div>
       </form>
-<!--
+      <!--
       <router-link to="/" class="mobile-menu-item">Home</router-link> -->
     </div>
   </header>
@@ -67,7 +66,6 @@ const toggleMobileMenu = () => {
 }
 /* Navbar Container */
 .header-container {
-  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -79,8 +77,6 @@ const toggleMobileMenu = () => {
 
 /* Menubar Full Width */
 .full-width-navbar {
-  width: 100%;
-  max-width: 1320px;
   margin: 0 auto;
   height: 70px;
   background-color: white;

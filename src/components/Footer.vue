@@ -52,7 +52,7 @@ import { RouterLink } from 'vue-router';
 .footer-container {
   width: 100%;
   background-color: black;
-  padding: 30px 20px;
+  padding: 32px 12px 12px 12px;
   text-align: center;
 }
 
@@ -117,7 +117,7 @@ import { RouterLink } from 'vue-router';
   font-size: 14px;
   color: white;
   font-weight: bold;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #3b3b3b;
   padding-top: 10px;
 }
 </style>
