@@ -113,6 +113,7 @@ watch(() => route.params.store, (newStore, oldStore) => {
   text-transform: uppercase;
   border-radius: 5px;
     transition: all 0.3s ease;
+    padding-bottom: 8px;
 }
 
 

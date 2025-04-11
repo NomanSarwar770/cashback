@@ -92,6 +92,7 @@ onMounted(async () => {
   text-align: center;
   margin: auto;
   min-height: 500px;
+  margin-bottom: 50px;
 }
 
 /* Table Title */
@@ -103,7 +104,8 @@ onMounted(async () => {
   margin-bottom: 5px;
   text-transform: uppercase;
   border-radius: 5px;
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  padding-bottom: 8px;
 }
 
 .full-page-container {

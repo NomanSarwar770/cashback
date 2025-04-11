@@ -96,6 +96,7 @@ onMounted(async () => {
   max-width: 1290px;
   text-align: center;
   margin:auto;
+  margin-bottom: 50px;
 }
 @media (max-width: 768px) {
   .table-container {
@@ -120,7 +121,8 @@ onMounted(async () => {
   margin-bottom: 5px;
   text-transform: uppercase;
   border-radius: 5px;
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  padding-bottom: 8px;
 }
 
 .full-page-container {

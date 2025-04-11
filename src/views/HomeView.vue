@@ -72,14 +72,14 @@ const prevImages = (type) => {
 
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img :src="img1" class="d-block w-100" alt="Slide 1">
+        <img :src="img1" class="d-block w-100 slider-image" alt="Slide 1">
       </div>
       <div class="carousel-item">
-        <img :src="img2" class="d-block w-100" alt="Slide 2">
+        <img :src="img2" class="d-block w-100 sliderr-image" alt="Slide 2">
       </div>
       <div class="carousel-item">
         <a href="https://www.google.com" target="_blank" rel="">
-          <img :src="img3" class="d-block w-100" alt="Slide 3">
+          <img :src="img3" class="d-block w-100 slider-image" alt="Slide 3">
         </a>
 
       </div>
@@ -494,6 +494,21 @@ const prevImages = (type) => {
   max-width: 100%;
   margin: 0 auto;
   margin-top: 75px;
+}
+.slider-image {
+  max-height: 800px;
+  width: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+}
+
+.sliderr-image {
+  max-height: 1000px;
+  width: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
 }
 
 .carousel-img {

@@ -29,9 +29,6 @@ const tabs = computed(() => [
 .tabs-wrapper {
   display: flex;
   justify-content: center;
-
-
-
 }
 .tabs-container {
   margin-top: 100px;
