@@ -75,13 +75,14 @@ const prevImages = (type) => {
         <img :src="img1" class="d-block w-100 slider-image" alt="Slide 1">
       </div>
       <div class="carousel-item">
+
+        <a href="https://www.google.com" target="_blank" class="slider-link">
+
         <img :src="img2" class="d-block w-100 sliderr-image" alt="Slide 2">
+        </a>
       </div>
       <div class="carousel-item">
-        <a href="https://www.google.com" target="_blank" rel="">
           <img :src="img3" class="d-block w-100 slider-image" alt="Slide 3">
-        </a>
-
       </div>
     </div>
 
@@ -232,6 +233,12 @@ const prevImages = (type) => {
   background: white;
   border-radius: 10px;
 
+}
+.slider-link {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .see-all-link {

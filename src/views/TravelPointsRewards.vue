@@ -132,7 +132,7 @@ onMounted(async () => {
   width: 100vw;
   background-color: #f8f8f8;
   padding: 0;
-  min-height: 500px;
+  height: auto;
   text-align: center;
 }
 html, body {
