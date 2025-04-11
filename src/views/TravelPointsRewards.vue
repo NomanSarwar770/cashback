@@ -42,7 +42,7 @@ onMounted(async () => {
   <Tabs />
 
   <div class="main-content">
-    <div v-if="isLoading" class="full-page-container">
+    <div v-if="isLoading" :class="['full-page-container', { loading: isLoading }]"> <!-- this class prevent it push down the tabs when loading the data-->
     <ProgressSpinner />
     <p class="loading-text">Loading Travel Points Rewards Offers...</p>
   </div>
@@ -134,6 +134,9 @@ onMounted(async () => {
   padding: 0;
   height: auto;
   text-align: center;
+}
+.full-page-container.loading {
+  min-height: 500px;
 }
 html, body {
   margin: 0;
