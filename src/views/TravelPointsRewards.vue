@@ -17,6 +17,13 @@ const columns = ref([
   { field: 'link', header: 'Offer Link' }
 ]);
 
+// const scrollToTop = () => {
+//   const el = document.querySelector('.table-container');
+//   if (el) {
+//     el.scrollIntoView({ behavior: 'smooth' });
+//   }
+// };
+
 const route = useRoute();
 const hostname = route.params.store;
 
@@ -60,7 +67,7 @@ onMounted(async () => {
   Displaying Results for <span class="hostname">{{ hostname }}</span>
 </h2>
 <DataTable :value="travelPointsData" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
-            responsiveLayout="scroll" class="styled-table">
+            responsiveLayout="scroll" class="styled-table" @page="scrollToTop">
             <Column field="title" header="Store">
               <template #body="slotProps">
                 <div style="display: flex; align-items: center; gap: 8px;">
@@ -93,7 +100,7 @@ onMounted(async () => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: hidden;
   width: 90%;
-  max-width: 1290px;
+  max-width: 1300px;
   text-align: center;
   margin:auto;
   margin-bottom: 50px;
@@ -124,6 +131,14 @@ onMounted(async () => {
   transition: all 0.3s ease;
   padding-bottom: 8px;
 }
+@media (max-width: 768px) {
+  .table-title {
+    padding: 10px 16px;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
 
 .full-page-container {
   display: flex;

@@ -74,7 +74,7 @@ onMounted(async () => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: hidden;
   width: 90%;
-  max-width: 1290px;
+  max-width: 1300px;
   text-align: center;
   margin: auto;
   min-height: 500px;
@@ -106,6 +106,13 @@ onMounted(async () => {
   border-radius: 5px;
   transition: all 0.3s ease;
   padding-bottom: 8px;
+}
+@media (max-width: 768px) {
+  .table-title {
+    padding: 10px 16px;
+    font-size: 16px;
+    text-align: center;
+  }
 }
 
 .full-page-container {

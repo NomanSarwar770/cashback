@@ -165,7 +165,6 @@ const toggleMobileMenu = () => {
 /* Mobile Dropdown Menu */
 .mobile-menu {
   display: none;
-  position: absolute;
   top: 70px;
   background: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -188,11 +187,11 @@ const toggleMobileMenu = () => {
 @media (max-width: 768px) {
 
   .full-width-navbar {
-    padding: 0 10px;
+    padding-block: 0;
   }
 
   .search-bar {
-    width: 180px;
+    width: 250px;
   }
 
   .mobile-menu-button {
@@ -205,6 +204,7 @@ const toggleMobileMenu = () => {
 
   .mobile-menu {
     display: block;
+    width: 100%;
   }
 }
 
@@ -220,6 +220,7 @@ const toggleMobileMenu = () => {
 }
 .desktop-search {
   display: flex;
+  margin-left: 20px;
 }
 
 .mobile-search {
@@ -240,5 +241,6 @@ const toggleMobileMenu = () => {
     width: 100%;
   }
 }
+
 
 </style>
