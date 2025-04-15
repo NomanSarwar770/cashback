@@ -35,7 +35,7 @@ const tabs = computed(() => [
   display: flex;
   background-color: white;
   width: 100%;
-  max-width: 1290px;
+  max-width: 1300px;
   position: relative;
   padding: 12px 20px;
   z-index: 999;

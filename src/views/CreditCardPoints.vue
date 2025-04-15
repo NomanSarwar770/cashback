@@ -88,7 +88,7 @@ onMounted(async () => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: hidden;
   width: 90%;
-  max-width: 1290px;
+  max-width: 1300px;
   text-align: center;
   margin: auto;
   min-height: 500px;
@@ -107,6 +107,14 @@ onMounted(async () => {
   transition: all 0.3s ease;
   padding-bottom: 8px;
 }
+@media (max-width: 768px) {
+  .table-title {
+    padding: 10px 16px;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
 
 .full-page-container {
   display: flex;
@@ -172,6 +180,7 @@ html, body {
 }
 .styled-table {
   width: 100%;
+  max-width: 100vw;
   overflow-x: auto;
   display: block;
 }
@@ -193,8 +202,25 @@ html, body {
 }
 .styled-table :deep(.p-datatable-thead th),
 .styled-table :deep(.p-datatable-tbody td) {
-  min-width: unset;
+  width: unset;
   white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .styled-table :deep(.p-datatable-thead th),
+  .styled-table :deep(.p-datatable-tbody td) {
+    white-space: normal !important;
+    word-break: break-word;
+    min-width: auto !important;
+  }
+
+  .styled-table :deep(.p-datatable-tbody td button),
+  .styled-table :deep(.p-datatable-tbody td .p-button) {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+    max-width: 100px;
+    width: auto;
+    white-space: nowrap;
+  }
 }
 
 /* Alternating Row Colors */
@@ -217,7 +243,7 @@ html, body {
   .table-container {
     margin-top: 0;
     top: 0;
-    padding: 35px;
+
   }
 
   .styled-table :deep(.p-datatable-thead th),
@@ -232,13 +258,16 @@ html, body {
     padding: 5px;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
+
   }
 
   .styled-table :deep(.p-datatable) {
     width: 100%;
+    display: block;
     overflow-x: auto;
     margin-bottom: 0 !important;
   }
+
 
   /* Reduce font sizes for mobile */
   .styled-table :deep(.p-datatable-thead th),
@@ -262,8 +291,7 @@ html, body {
   }
 
   .styled-table :deep(.p-datatable) {
-    width: 100%;
-    min-width: 400px;
+    width: auto;
   }
 
 
@@ -284,7 +312,7 @@ html, body {
   .table-container {
     margin-left: auto !important;
     margin-right: auto !important;
-    padding: 10px;
+
   }
 }
 
@@ -297,6 +325,7 @@ html, body {
   height: 50vh;
   text-align: center;
 }
+
 
 .loading-text {
   margin-top: 10px;

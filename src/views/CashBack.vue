@@ -99,7 +99,7 @@ watch(() => route.params.store, (newStore, oldStore) => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: hidden;
   width: 100%;
-  max-width: 1290px;
+  max-width: 1300px;
   text-align: center;
   margin: auto;
   margin-bottom: 50px;
@@ -114,6 +114,13 @@ watch(() => route.params.store, (newStore, oldStore) => {
   border-radius: 5px;
     transition: all 0.3s ease;
     padding-bottom: 8px;
+}
+@media (max-width: 768px) {
+  .table-title {
+    padding: 10px 16px;
+    font-size: 16px;
+    text-align: center;
+  }
 }
 
 
