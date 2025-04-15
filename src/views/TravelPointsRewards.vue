@@ -326,13 +326,19 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  min-height: 500px;
+}
+@media (max-width: 768px) {
+  .main-content {
+    min-height: auto !important;
+  }
 }
 
 /* Table and Loading Styling */
 .table-container, .loading-container {
   width: 100%;
   text-align: center;
+  padding: 10px;
 }
 @media (max-width: 768px) {
   .full-page-container {

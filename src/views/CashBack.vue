@@ -229,6 +229,7 @@ html, body {
   .table-container {
     margin-left: auto !important;
     margin-right: auto !important;
+    padding: 10px;
   }
 }
 
@@ -336,6 +337,7 @@ html, body {
 .table-container, .loading-container {
   width: 100%;
   text-align: center;
+  padding: 10px;
 }
 @media (max-width: 768px) {
   .full-page-container {
