@@ -3,14 +3,12 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-// Use fallback if route.params.store is undefined
-const currentStore = computed(() => route.params.store || 'walmart')
 
 const tabs = computed(() => [
-{ label: 'Cashback', path: `/cashback/${currentStore.value}` },
-  { label: 'Gift Cards', path: `/giftcards/${currentStore.value}` },
-  { label: 'Travel Points/Rewards', path: `/travelpointsrewards/${currentStore.value}` },
-  { label: 'Credit Card/Points', path: `/creditcardpoints/${currentStore.value}` }
+  { label: 'Cashback', path: `/cashback/${route.params.store}` },
+  { label: 'Gift Cards', path: `/giftcards/${route.params.store}` },
+  { label: 'Travel Points/Rewards', path: `/travelpointsrewards/${route.params.store}` },
+  { label: 'Credit Card/Points', path: `/creditcardpoints/${route.params.store}` }
 ]);
 
 </script>

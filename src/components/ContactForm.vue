@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import Tabs from './Tabs.vue'
 
 const toast = useToast()
 
@@ -53,7 +52,6 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <Tabs />
   <div class="page-container">
     <div class="main-content">
       <div class="full-page-container">
@@ -108,7 +106,7 @@ const submitForm = async () => {
   margin: 0;
 }
 .form-wrapper {
-
+  margin-top: 80px;
   display: flex;
   justify-content: center;
   padding: 10px 10px 10px 10px;
@@ -150,9 +148,9 @@ h2 {
   margin: 0;
 }
 button {
-  background-color: #007bff;
+  background-color: rgb(4, 102, 4);
   color: white;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 4rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;

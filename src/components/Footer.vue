@@ -9,6 +9,7 @@ import { RouterLink } from 'vue-router';
         <h3>About</h3>
         <ul>
           <li><RouterLink to="">Our Story</RouterLink></li>
+          <li><RouterLink to="/privacy">Privacy Policy</RouterLink></li>
         </ul>
       </div>
 
@@ -34,7 +35,7 @@ import { RouterLink } from 'vue-router';
         <ul>
           <li>Email: hello@revsavings.com</li>
           <li>Phone: +1 (321) 385-7685</li>
-          <li><RouterLink to="/contact">Contact Form</RouterLink></li>
+          <li><RouterLink to="/contact">Contact Us</RouterLink></li>
         </ul>
       </div>
     </div>
