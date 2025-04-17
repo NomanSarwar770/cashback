@@ -12,7 +12,7 @@ const form = ref({
 
 const submitForm = async () => {
   try {
-    const response = await fetch('https://revsavings.com/sendMail.php', {
+    const response = await fetch('https://revsavings.com/api/sendMail.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -112,6 +112,7 @@ const submitForm = async () => {
   padding: 10px 10px 10px 10px;
   margin-bottom: 50px;
   background-color: white;
+  margin-bottom: 50px;
 
 }
 
