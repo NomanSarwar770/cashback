@@ -6,6 +6,7 @@ import StoresByReward from '@/views/StoresByReward.vue'
 import MostViewedStores from '@/views/MostViewedStores.vue'
 import TravelPointsRewards from '@/views/TravelPointsRewards.vue'
 import CreditCardPoints from '@/views/CreditCardPoints.vue'
+import ContactForm from '@/components/ContactForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,7 @@ const router = createRouter({
     { path: '/', name: 'HomeView', component: HomeView },
     { path: '/cashback/:store', name: 'CashBack', component: CashBack },
     { path: '/giftcards/:store', name: 'Travel', component: Travel },
+    { path: '/contact', name: 'Contact', component: ContactForm },
     {
       path: '/travelpointsrewards/:store',
       name: 'TravelPointsRewards',

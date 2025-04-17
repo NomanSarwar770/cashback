@@ -3,9 +3,9 @@ import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import img1 from '@/assets/slider 1.jpg'
-import img2 from '@/assets/slider 3.png'
-import img3 from '@/assets/slider 2.jpg'
+import img1 from '@/assets/slider692.jpg'
+import img2 from '@/assets/slider692c.png'
+import img3 from '@/assets/slider692m.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
@@ -74,16 +74,17 @@ const prevImages = (type) => {
       <div class="carousel-item active">
         <img :src="img1" class="d-block w-100 slider-image" alt="Slide 1">
       </div>
-      <div class="carousel-item">
 
-        <a href="https://www.google.com" target="_blank" class="slider-link">
-
-        <img :src="img2" class="d-block w-100 sliderr-image" alt="Slide 2">
-        </a>
-      </div>
       <div class="carousel-item">
           <img :src="img3" class="d-block w-100 slider-image" alt="Slide 3">
       </div>
+      <div class="carousel-item">
+
+<a href="https://www.google.com" target="_blank" class="slider-link">
+
+<img :src="img2" class="d-block w-100 sliderr-image" alt="Slide 2">
+</a>
+</div>
     </div>
 
     <!-- Controls -->
@@ -503,7 +504,7 @@ const prevImages = (type) => {
   margin-top: 75px;
 }
 .slider-image {
-  max-height: 800px;
+  min-height: 200px;
   width: 100%;
   object-fit: cover;
   margin: 0 auto;

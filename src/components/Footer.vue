@@ -9,17 +9,14 @@ import { RouterLink } from 'vue-router';
         <h3>About</h3>
         <ul>
           <li><RouterLink to="">Our Story</RouterLink></li>
-          <li><RouterLink to="">Team</RouterLink></li>
-          <li><RouterLink to="">Careers</RouterLink></li>
         </ul>
       </div>
 
       <div class="footer-column">
         <h3>Media</h3>
         <ul>
-          <li><RouterLink to="">Press Releases</RouterLink></li>
-          <li><RouterLink to="">News & Updates</RouterLink></li>
-          <li><RouterLink to="">Gallery</RouterLink></li>
+          <li><RouterLink to="">Chrome Extension</RouterLink></li>
+
         </ul>
       </div>
 
@@ -35,9 +32,9 @@ import { RouterLink } from 'vue-router';
       <div class="footer-column">
         <h3>Contact Us</h3>
         <ul>
-          <li>Email: support@revsavings.com</li>
-          <li>Phone: +1 (123) 456-7890</li>
-          <li><RouterLink to="">Contact Form</RouterLink></li>
+          <li>Email: hello@revsavings.com</li>
+          <li>Phone: +1 (321) 385-7685</li>
+          <li><RouterLink to="/contact">Contact Form</RouterLink></li>
         </ul>
       </div>
     </div>
