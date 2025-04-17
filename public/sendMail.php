@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $to = "nomansarwark@gmail.com";
+    $to = "hello@revsavings.com";
     $subject = "New Contact Form Submission";
     $body = "Name: $name\nEmail: $email\nMessage:\n$message";
     $headers = "From: $email\r\nReply-To: $email\r\nX-Mailer: PHP/" . phpversion();

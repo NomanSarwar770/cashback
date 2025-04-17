@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
+import Button from 'primevue/button'
 
 const toast = useToast()
 
@@ -10,7 +11,10 @@ const form = ref({
   message: ''
 })
 
+const loading = ref(false)
+
 const submitForm = async () => {
+  loading.value = true
   try {
     const response = await fetch('https://revsavings.com/api/sendMail.php', {
       method: 'POST',
@@ -38,7 +42,6 @@ const submitForm = async () => {
         life: 3000
       })
     }
-
   } catch (error) {
     toast.add({
       severity: 'error',
@@ -47,6 +50,8 @@ const submitForm = async () => {
       life: 3000
     })
     console.error('Error sending form:', error)
+  } finally {
+    loading.value = false
   }
 }
 </script>
@@ -76,7 +81,7 @@ const submitForm = async () => {
               </div>
 
               <div class="button-wrapper">
-  <button type="submit">Send</button>
+                <Button type="submit" label="Send" :loading="loading" />
 </div>
             </form>
           </div>
@@ -165,7 +170,10 @@ button {
 
 
 button:hover {
-  background-color: #0056b3;
+  background-color: rgb(4, 102, 4);
+}
+.p-button {
+  background-color: rgb(4, 102, 4);
 }
 
 .success {

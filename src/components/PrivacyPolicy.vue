@@ -155,6 +155,7 @@ const policySections = [
   padding: 0;
   text-align: left;
   min-height: 500px;
+  margin-bottom: 50px;
 }
 
 h1 {
