@@ -50,7 +50,7 @@ onMounted(async () => {
           responsiveLayout="scroll" class="styled-table">
 
           <Column field="title" header="Store" />
-          <Column field="rate" header="Cashback Rate" />
+          <Column field="rate" header="Discount" />
           <Column field="link" header="Offer Link">
             <template #body="slotProps">
               <a :href="slotProps.data.link" target="_blank" style="text-decoration: none;">
