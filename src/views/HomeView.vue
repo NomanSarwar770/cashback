@@ -332,6 +332,12 @@ const prevImages = (type) => {
   font-size: 14px;
   font-weight: bold;
   text-transform: capitalize;
+  text-decoration: none !important;
+  color: black;
+}
+.image-card {
+  text-decoration: none;
+
 }
 
 .pagination {
@@ -443,6 +449,9 @@ const prevImages = (type) => {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   margin-bottom: 15px;
+  color: black;
+  text-decoration: none;
+
 }
 
 .dialog-image-card img {
@@ -704,6 +713,7 @@ const prevImages = (type) => {
   max-width: 100%;
   display: block;
   margin: 0 auto;
+  text-decoration: none;
 }
 .dialog-image-card img {
   height: 50px;
@@ -719,5 +729,6 @@ const prevImages = (type) => {
   font-weight: 500;
   margin-top: 40px !important;
 }
+
 
 </style>
