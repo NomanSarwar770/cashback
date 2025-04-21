@@ -10,6 +10,9 @@ const searchQuery = ref('');
 const isMobileMenuVisible = ref(false);
 
 const handleSubmit = () => {
+  if(searchQuery.value.trim() ==='') {
+    return;
+  }
   router.push({ path: `/cashback/${searchQuery.value}` });
 };
 

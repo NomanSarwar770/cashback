@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { onMounted } from 'vue';
+import axios from 'axios';
 import { RouterLink } from 'vue-router';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
@@ -9,32 +11,38 @@ import img3 from '@/assets/slider2.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
-const stores = ref([
-  { id: 1, name: 'Walmart', image: new URL('../assets/wallmart.png', import.meta.url).href, reward: 5, path: "cashback/?q=walmart" },
-  { id: 2, name: 'Nike', image: new URL('../assets/nike.png', import.meta.url).href, reward: 3, path: "cashback/?q=nike" },
-  { id: 3, name: 'Athleta', image: new URL('../assets/athleta.png', import.meta.url).href, reward: 4 },
-  { id: 4, name: 'Temu', image: new URL('../assets/temu.png', import.meta.url).href, reward: 2 },
-  { id: 5, name: 'Mac', image: new URL('../assets/mac.jpg', import.meta.url).href, reward: 6 },
-  { id: 6, name: 'Old Navy', image: new URL('../assets/oldnavy.jpg', import.meta.url).href, reward: 3 },
-  { id: 7, name: 'Samsung', image: new URL('../assets/samsung.jpg', import.meta.url).href, reward: 4 },
-  { id: 8, name: 'Ultra', image: new URL('../assets/ultra.png', import.meta.url).href, reward: 5 },
-  { id: 9, name: 'Lenovo', image: new URL('../assets/lenovo.png', import.meta.url).href, reward: 4 },
-  { id: 10, name: 'Athleta', image: new URL('../assets/athleta.png', import.meta.url).href, reward: 4 },
-  { id: 11, name: 'eBay', image: new URL('../assets/ebay.png', import.meta.url).href, reward: 3 },
-  { id: 12, name: 'Mac', image: new URL('../assets/mac.jpg', import.meta.url).href, reward: 6 },
-]);
+ const mostViewedStores = ref([]);
+ const sortedByRewardStores = ref([]);
 
+ const loading = ref(true);
+ onMounted(async () => {
+  try {
+    const resMostViewed = await axios.get('https://revroi.oaroulette.com/?action=revsavings.topViewedStores');
+    console.log('Most Viewed Stores:', resMostViewed.data);
+    mostViewedStores.value = resMostViewed.data;
 
-const mostViewedStores = computed(() => {
-  return stores.value.map(store => ({ ...store }));
+    const resSortedByReward = await axios.get('https://revroi.oaroulette.com/?action=revsavings.topCashbackStores');
+    console.log('Sorted By Reward Stores:', resSortedByReward.data);
+    sortedByRewardStores.value = resSortedByReward.data;
+  } catch (error) {
+    console.error('Error fetching stores:', error);
+  }
+  finally {
+    loading.value = false;
+  }
 });
 
-const sortedByRewardStores = computed(() => {
-  return stores.value.map(store => ({
-    ...store,
-    path: `/storesbyreward/${store.name.toLowerCase().replace(/\s+/g, '-')}`
-  }));
-});
+
+// const mostViewedStores = computed(() => {
+//   return stores.value.map(store => ({ ...store }));
+// });
+
+// const sortedByRewardStores = computed(() => {
+//   return stores.value.map(store => ({
+//     ...store,
+//     path: `/storesbyreward/${store.name.toLowerCase().replace(/\s+/g, '-')}`
+//   }));
+// });
 
 const showAllMostViewed = ref(false);
 const showMostViewedDialog = ref(false);
@@ -105,7 +113,9 @@ const prevImages = (type) => {
     </button>
   </div>
 
-
+  <div v-if="loading" class="text-center my-5">
+    <p class="fs-4 fw-bold">Loading stores...</p>
+  </div>
 
   <div class="container px-0">
     <!-- The Most Viewed Stores -->
@@ -118,10 +128,11 @@ const prevImages = (type) => {
         <div
           v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
           :key="store.id" class="image-card">
-          <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
-            <img :src="store.image" :alt="store.name" />
+          <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
+            <img :src="store.logo" :alt="store.website" />
           </RouterLink>
-          <p>{{ store.name }}</p>
+          <p>{{ store.website }}</p>
+          <p>{{ store.total_entries }} Entries</p>
         </div>
       </div>
       <!-- Most Viewed Stores Dialog -->
@@ -129,10 +140,10 @@ const prevImages = (type) => {
         :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
           <div v-for="store in mostViewedStores" :key="store.id" class="dialog-image-card">
-            <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
-              <img :src="store.image" :alt="store.name" />
+            <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
+              <img :src="store.logo" :alt="store.website" />
             </RouterLink>
-            <p>{{ store.name }}</p>
+            <p>{{ store.website }}</p>
           </div>
         </div>
       </Dialog>
@@ -149,7 +160,7 @@ const prevImages = (type) => {
           severity="primary" rounded aria-label="Previous" class="me-3" />
 
         <Button @click="nextImages('mostViewed')"
-          :disabled="startIndexMostViewed + imagesPerPage >= stores.length" icon="pi pi-arrow-right"
+          :disabled="startIndexMostViewed + imagesPerPage >= mostViewedStores.length" icon="pi pi-arrow-right"
           severity="primary" rounded aria-label="Next" />
       </div>
     </div>
@@ -167,11 +178,11 @@ const prevImages = (type) => {
         <div
           v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
           :key="store.id" class="image-card">
-          <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
-            <img :src="store.image" :alt="store.name" />
+          <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
+            <img :src="store.logo" :alt="store.website" />
           </RouterLink>
-          <p>{{ store.name }}</p>
-        </div>
+          <p>{{ store.website }}</p>
+           </div>
       </div>
 
       <!-- Stores Sorted by Reward Dialog -->
@@ -179,10 +190,11 @@ const prevImages = (type) => {
         :style="{ width: '80vw', height: '80vh' }">
         <div class="dialog-image-grid">
           <div v-for="store in sortedByRewardStores" :key="store.id" class="dialog-image-card">
-            <RouterLink :to="`/cashback/${store.name.toLowerCase().replace(/\s+/g, '-')}`">
-              <img :src="store.image" :alt="store.name" />
+            <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
+              <img :src="store.logo" :alt="store.website" />
             </RouterLink>
-            <p>{{ store.name }}</p>
+            <p>{{ store.website }}</p>
+            <p class="text-muted small">Avg. Reward: {{ Number(store.average_rate).toFixed(2) }}%</p>
           </div>
         </div>
       </Dialog>
@@ -200,7 +212,7 @@ const prevImages = (type) => {
           severity="primary" rounded aria-label="Previous" class="me-3" />
 
         <Button @click="nextImages('sortedByReward')"
-          :disabled="startIndexSortedByReward + imagesPerPage >= stores.length" icon="pi pi-arrow-right"
+          :disabled="startIndexSortedByReward + imagesPerPage >= sortedByRewardStores" icon="pi pi-arrow-right"
           severity="primary" rounded aria-label="Next" />
       </div>
     </div>
@@ -628,6 +640,31 @@ const prevImages = (type) => {
     width: 100%;
     height:80px;
   }
+
+
 }
+
+@media (max-width: 768px) {
+  .slider-wrapper {
+    object-fit: cover;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    width: 100%;
+  height: auto;
+    margin-right: 0;
+  }
+  .carousel-inner {
+  width: 100%;
+  max-width: 100%;
+}
+
+  .slider-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+}
+
 
 </style>
