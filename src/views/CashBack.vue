@@ -46,7 +46,7 @@ watch(() => route.params.store, (newStore, oldStore) => {
     <Tabs />
 
     <div class="main-content">
-      <div v-if="isLoading" class="full-page-container">
+      <div v-if="isLoading" :class="['full-page-container', { loading: isLoading }]">
         <ProgressSpinner />
         <p class="loading-text">Loading Cashback Offers...</p>
       </div>
@@ -125,7 +125,6 @@ watch(() => route.params.store, (newStore, oldStore) => {
 
 
 .full-page-container {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100vw;

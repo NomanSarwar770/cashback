@@ -140,7 +140,7 @@ html, body {
 /* Table Base Styling */
 .styled-table :deep(.p-datatable) {
   max-width: 100%;
-  width: auto; /* Ensure it only takes necessary space */
+  width: auto;
 }
 .styled-table :deep(.p-datatable-tbody td),
 .styled-table :deep(.p-datatable-thead th) {
@@ -231,7 +231,7 @@ html, body {
   }
 
   .styled-table :deep(.p-datatable) {
-    width: 100%; /* Ensure full width within container */
+    width: 100%;
     overflow-x: auto;
     margin-bottom: 0 !important;
   }

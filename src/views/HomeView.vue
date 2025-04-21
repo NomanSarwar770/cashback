@@ -1,7 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref} from 'vue';
 import { onMounted } from 'vue';
 import axios from 'axios';
+import ProgressSpinner from 'primevue/progressspinner';
 import { RouterLink } from 'vue-router';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
@@ -14,24 +15,27 @@ import img5 from '@/assets/lenovo.png'
  const mostViewedStores = ref([]);
  const sortedByRewardStores = ref([]);
 
- const loading = ref(true);
- onMounted(async () => {
+ const loadingMostViewed = ref(true);
+const loadingSortedByReward = ref(true);
+onMounted(async () => {
   try {
     const resMostViewed = await axios.get('https://revroi.oaroulette.com/?action=revsavings.topViewedStores');
-    console.log('Most Viewed Stores:', resMostViewed.data);
     mostViewedStores.value = resMostViewed.data;
+  } catch (error) {
+    console.error('Error fetching most viewed stores:', error);
+  } finally {
+    loadingMostViewed.value = false;
+  }
 
+  try {
     const resSortedByReward = await axios.get('https://revroi.oaroulette.com/?action=revsavings.topCashbackStores');
-    console.log('Sorted By Reward Stores:', resSortedByReward.data);
     sortedByRewardStores.value = resSortedByReward.data;
   } catch (error) {
-    console.error('Error fetching stores:', error);
-  }
-  finally {
-    loading.value = false;
+    console.error('Error fetching sorted by reward stores:', error);
+  } finally {
+    loadingSortedByReward.value = false;
   }
 });
-
 
 // const mostViewedStores = computed(() => {
 //   return stores.value.map(store => ({ ...store }));
@@ -113,28 +117,39 @@ const prevImages = (type) => {
     </button>
   </div>
 
-  <div v-if="loading" class="text-center my-5">
-    <p class="fs-4 fw-bold">Loading stores...</p>
-  </div>
+
 
   <div class="container px-0">
     <!-- The Most Viewed Stores -->
+    <div v-if="loadingMostViewed" class="text-center my-5">
+  <ProgressSpinner style="width: 50px; height: 50px;" strokeWidth="8" />
+</div>
     <div class="row gx-0 px-0">
       <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
         <h2 class="mb-0 fs-5 fs-md-3">The Most Viewed Stores</h2>
         <a href="#" @click.prevent="showMostViewedDialog = true" class="btn btn-sm btn-light fw-bold text-dark">See All</a>
       </div>
-      <div class="image-grid">
-        <div
-          v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
-          :key="store.id" class="image-card">
-          <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
-            <img :src="store.logo" :alt="store.website" />
-          </RouterLink>
-          <p>{{ store.website }}</p>
-          <p>{{ store.total_entries }} Entries</p>
-        </div>
-      </div>
+  <div class="image-grid-wrapper">
+  <div class="image-grid">
+    <div
+      v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
+      :key="store.id"
+      class="image-card"
+    >
+      <RouterLink
+        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      >
+        <img :src="store.logo" :alt="store.website" />
+      </RouterLink>
+      <RouterLink
+        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+        class="store-name-link"
+      >
+       <p>{{ store.website }}</p>
+      </RouterLink>
+    </div>
+  </div>
+</div>
       <!-- Most Viewed Stores Dialog -->
       <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores"
         :style="{ width: '80vw', height: '80vh' }">
@@ -165,6 +180,10 @@ const prevImages = (type) => {
       </div>
     </div>
 
+
+    <div v-if="loadingSortedByReward" class="text-center my-5">
+  <ProgressSpinner style="width: 50px; height: 50px;" strokeWidth="8" />
+</div>
     <!-- Stores Sorted by Reward -->
     <div class="row gx-0 px-0">
       <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
@@ -174,16 +193,27 @@ const prevImages = (type) => {
         </a>
       </div>
 
-      <div class="image-grid">
-        <div
-          v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
-          :key="store.id" class="image-card">
-          <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
-            <img :src="store.logo" :alt="store.website" />
-          </RouterLink>
-          <p>{{ store.website }}</p>
-           </div>
-      </div>
+      <div class="image-grid-wrapper">
+  <div class="image-grid">
+    <div
+      v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
+      :key="store.id"
+      class="image-card"
+    >
+      <RouterLink
+        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      >
+        <img :src="store.logo" :alt="store.website" />
+      </RouterLink>
+      <RouterLink
+        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+        class="store-name-link"
+      >
+        <p>{{ store.website }}</p>
+      </RouterLink>
+    </div>
+  </div>
+</div>
 
       <!-- Stores Sorted by Reward Dialog -->
       <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward"
@@ -287,15 +317,15 @@ const prevImages = (type) => {
   display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     /* grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
     /* gap: 0; */
+    gap: 47px;
   margin-bottom: 10px;
 }
 .image-card {
   text-align: center;
   background: white;
-  padding: 10px;
+  padding: 0;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -313,6 +343,7 @@ const prevImages = (type) => {
   margin-top: 15px;
   font-size: 14px;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .pagination {
@@ -418,7 +449,12 @@ const prevImages = (type) => {
 
 .dialog-image-card {
   text-align: center;
-  padding: 15px;
+  padding: 10px;
+  border-radius: 3px;
+  background: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
 }
 
 .dialog-image-card img {
@@ -666,5 +702,34 @@ const prevImages = (type) => {
 }
 }
 
+@media (max-width: 768px) {
+  .image-grid {
+    gap: 10px;
+    justify-content: center;
+  }
+
+}
+.image-card img {
+  height: 50px;
+  object-fit: contain;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.dialog-image-card img {
+  height: 50px;
+  object-fit: contain;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.store-name-link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  margin-top: 40px !important;
+}
 
 </style>
