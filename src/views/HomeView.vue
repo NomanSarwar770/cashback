@@ -465,6 +465,7 @@ const prevImages = (type) => {
   margin-top: 5px;
   font-size: 16px;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .related-links {
