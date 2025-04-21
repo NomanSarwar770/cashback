@@ -54,7 +54,7 @@ const showSortedByRewardDialog = ref(false);
 const showAllSortedByReward = ref(false);
 const startIndexMostViewed = ref(0);
 const startIndexSortedByReward = ref(0);
-const imagesPerPage = 6;
+const imagesPerPage = 7;
 
 const nextImages = (type) => {
   if (type === 'mostViewed' && startIndexMostViewed.value + imagesPerPage < mostViewedStores.value.length) {
@@ -129,40 +129,34 @@ const prevImages = (type) => {
         <h2 class="mb-0 fs-5 fs-md-3">The Most Viewed Stores</h2>
         <a href="#" @click.prevent="showMostViewedDialog = true" class="btn btn-sm btn-light fw-bold text-dark">See All</a>
       </div>
-  <div class="image-grid-wrapper">
-  <div class="image-grid">
-    <div
+      <div class="image-grid-wrapper" >
+  <div class="image-grid" >
+    <RouterLink
       v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
       :key="store.id"
+      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
       class="image-card"
     >
-      <RouterLink
-        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
-      >
-        <img :src="store.logo" :alt="store.website" />
-      </RouterLink>
-      <RouterLink
-        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
-        class="store-name-link"
-      >
-       <p>{{ store.website }}</p>
-      </RouterLink>
-    </div>
+      <img :src="store.logo" :alt="store.website" />
+      <p>{{ store.website }}</p>
+    </RouterLink>
   </div>
 </div>
       <!-- Most Viewed Stores Dialog -->
       <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores"
         :style="{ width: '80vw', height: '80vh' }">
-        <div class="dialog-image-grid">
-          <div v-for="store in mostViewedStores" :key="store.id" class="dialog-image-card">
-            <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
-              <img :src="store.logo" :alt="store.website" />
-            </RouterLink>
-            <p>{{ store.website }}</p>
-          </div>
-        </div>
-      </Dialog>
-
+  <div class="dialog-image-grid">
+    <RouterLink
+      v-for="store in mostViewedStores"
+      :key="store.id"
+      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      class="dialog-image-card"
+    >
+      <img :src="store.logo" :alt="store.website" />
+      <p>{{ store.website }}</p>
+    </RouterLink>
+  </div>
+</Dialog>
       <div class="pagination">
         <!-- <button @click="prevImages('mostViewed')" :disabled="startIndexMostViewed === 0" class="image-buttonp">
           <img src="@/assets/back.png" alt="Previous" />
@@ -195,39 +189,33 @@ const prevImages = (type) => {
 
       <div class="image-grid-wrapper">
   <div class="image-grid">
-    <div
+    <RouterLink
       v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
       :key="store.id"
+      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
       class="image-card"
     >
-      <RouterLink
-        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
-      >
-        <img :src="store.logo" :alt="store.website" />
-      </RouterLink>
-      <RouterLink
-        :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
-        class="store-name-link"
-      >
-        <p>{{ store.website }}</p>
-      </RouterLink>
-    </div>
+      <img :src="store.logo" :alt="store.website" />
+      <p>{{ store.website }}</p>
+    </RouterLink>
   </div>
 </div>
 
       <!-- Stores Sorted by Reward Dialog -->
       <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward"
         :style="{ width: '80vw', height: '80vh' }">
-        <div class="dialog-image-grid">
-          <div v-for="store in sortedByRewardStores" :key="store.id" class="dialog-image-card">
-            <RouterLink :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`">
-              <img :src="store.logo" :alt="store.website" />
-            </RouterLink>
-            <p>{{ store.website }}</p>
-            <p class="text-muted small">Avg. Reward: {{ Number(store.average_rate).toFixed(2) }}%</p>
-          </div>
-        </div>
-      </Dialog>
+  <div class="dialog-image-grid">
+    <RouterLink
+      v-for="store in sortedByRewardStores"
+      :key="store.id"
+      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      class="dialog-image-card"
+    >
+      <img :src="store.logo" :alt="store.website" />
+      <p>{{ store.website }}</p>
+    </RouterLink>
+  </div>
+</Dialog>
 
       <div class="pagination">
         <!-- <button @click="prevImages('sortedByReward')" :disabled="startIndexSortedByReward === 0" class="image-buttonp">
@@ -319,13 +307,13 @@ const prevImages = (type) => {
     align-items: center;
     /* grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
     /* gap: 0; */
-    gap: 47px;
+    gap: 45px;
   margin-bottom: 10px;
 }
 .image-card {
   text-align: center;
   background: white;
-  padding: 0;
+  padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -726,7 +714,7 @@ const prevImages = (type) => {
   margin: 0 auto;
 }
 .store-name-link {
-  text-decoration: none;
+  text-decoration: none !important;
   color: inherit;
   font-weight: 500;
   margin-top: 40px !important;
