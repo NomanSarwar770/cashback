@@ -139,6 +139,7 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
+      <!-- <p style="color: green; font-weight: bold;">{{ store.total_entries }}</p> -->
     </RouterLink>
   </div>
 </div>
@@ -154,6 +155,7 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
+      <!-- <p style="color: green; font-weight: bold;">{{ store.total_entries }}</p> -->
     </RouterLink>
   </div>
 </Dialog>
@@ -197,6 +199,7 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
+       <p style="color: green; font-weight: bold;">{{ Number(store.average_rate).toFixed(2) }}%</p>
     </RouterLink>
   </div>
 </div>
@@ -213,6 +216,7 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
+      <p style="color: green; font-weight: bold;">{{ Number(store.average_rate).toFixed(2) }}%</p>
     </RouterLink>
   </div>
 </Dialog>
