@@ -1,6 +1,5 @@
 <script setup>
-import { ref} from 'vue';
-import { onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import axios from 'axios';
 import ProgressSpinner from 'primevue/progressspinner';
 import { RouterLink } from 'vue-router';
@@ -12,12 +11,29 @@ import img3 from '@/assets/slider2.jpg'
 import img4 from '@/assets/athleta.jpg'
 import img5 from '@/assets/lenovo.png'
 
- const mostViewedStores = ref([]);
- const sortedByRewardStores = ref([]);
+const mostViewedStores = ref([]);
+const sortedByRewardStores = ref([]);
 
- const loadingMostViewed = ref(true);
+const loadingMostViewed = ref(true);
 const loadingSortedByReward = ref(true);
+
+const showAllMostViewed = ref(false);
+const showMostViewedDialog = ref(false);
+const showSortedByRewardDialog = ref(false);
+const showAllSortedByReward = ref(false);
+const startIndexMostViewed = ref(0);
+const startIndexSortedByReward = ref(0);
+const imagesPerPage = ref(7);
+
+// Function to update images per page depending on screen width
+const updateImagesPerPage = () => {
+  imagesPerPage.value = window.innerWidth < 768 ? 6 : 7;
+};
+
 onMounted(async () => {
+  updateImagesPerPage();
+  window.addEventListener('resize', updateImagesPerPage);
+
   try {
     const resMostViewed = await axios.get('https://revroi.oaroulette.com/?action=revsavings.topViewedStores');
     mostViewedStores.value = resMostViewed.data;
@@ -37,38 +53,23 @@ onMounted(async () => {
   }
 });
 
-// const mostViewedStores = computed(() => {
-//   return stores.value.map(store => ({ ...store }));
-// });
-
-// const sortedByRewardStores = computed(() => {
-//   return stores.value.map(store => ({
-//     ...store,
-//     path: `/storesbyreward/${store.name.toLowerCase().replace(/\s+/g, '-')}`
-//   }));
-// });
-
-const showAllMostViewed = ref(false);
-const showMostViewedDialog = ref(false);
-const showSortedByRewardDialog = ref(false);
-const showAllSortedByReward = ref(false);
-const startIndexMostViewed = ref(0);
-const startIndexSortedByReward = ref(0);
-const imagesPerPage = 7;
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateImagesPerPage);
+});
 
 const nextImages = (type) => {
-  if (type === 'mostViewed' && startIndexMostViewed.value + imagesPerPage < mostViewedStores.value.length) {
-    startIndexMostViewed.value += imagesPerPage;
-  } else if (type === 'sortedByReward' && startIndexSortedByReward.value + imagesPerPage < sortedByRewardStores.value.length) {
-    startIndexSortedByReward.value += imagesPerPage;
+  if (type === 'mostViewed' && startIndexMostViewed.value + imagesPerPage.value < mostViewedStores.value.length) {
+    startIndexMostViewed.value += imagesPerPage.value;
+  } else if (type === 'sortedByReward' && startIndexSortedByReward.value + imagesPerPage.value < sortedByRewardStores.value.length) {
+    startIndexSortedByReward.value += imagesPerPage.value;
   }
 };
 
 const prevImages = (type) => {
   if (type === 'mostViewed' && startIndexMostViewed.value > 0) {
-    startIndexMostViewed.value -= imagesPerPage;
+    startIndexMostViewed.value -= imagesPerPage.value;
   } else if (type === 'sortedByReward' && startIndexSortedByReward.value > 0) {
-    startIndexSortedByReward.value -= imagesPerPage;
+    startIndexSortedByReward.value -= imagesPerPage.value;
   }
 };
 </script>
@@ -101,7 +102,7 @@ const prevImages = (type) => {
 </div>
 <div class="carousel-item">
   <div class="slider-wrapper">
-    <a href="https://www.google.com" target="_blank" class="slider-link">
+    <a href="https://chromewebstore.google.com/detail/rev-savings/dhihbnnpblebokhdeniedlmlmdhliolb" target="_blank" class="slider-link">
       <img :src="img2" class="slider-image" alt="Slide 2" style="pointer-events: none;">
     </a>
   </div>

@@ -16,8 +16,11 @@ import { RouterLink } from 'vue-router';
       <div class="footer-column">
         <h3>Media</h3>
         <ul>
-          <li><RouterLink to="">Chrome Extension</RouterLink></li>
-
+          <li>
+  <a href="https://chromewebstore.google.com/detail/rev-savings/dhihbnnpblebokhdeniedlmlmdhliolb" target="_blank" rel="noopener noreferrer">
+    Chrome Extension
+  </a>
+</li>
         </ul>
       </div>
 
