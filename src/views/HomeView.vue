@@ -596,10 +596,8 @@ const prevImages = (type) => {
   object-fit: cover;
 
 }
-
 .carousel-item {
   width: 100%;
-
 }
 
 .carousel-slider {
@@ -679,30 +677,6 @@ const prevImages = (type) => {
     width: 100%;
     height:80px;
   }
-
-
-}
-
-@media (max-width: 768px) {
-  .slider-wrapper {
-    object-fit: cover;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    width: 100%;
-  height: auto;
-    margin-right: 0;
-  }
-  .carousel-inner {
-  width: 100%;
-  max-width: 100%;
-}
-
-  .slider-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
 }
 
 @media (max-width: 768px) {
@@ -710,7 +684,6 @@ const prevImages = (type) => {
     gap: 10px;
     justify-content: center;
   }
-
 }
 .image-card img {
   height: 50px;
@@ -736,5 +709,13 @@ const prevImages = (type) => {
   margin-top: 40px !important;
 }
 
+@media (max-width: 768px) {
+  .slider-image {
+    height: 200px;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    }
+}
 
 </style>
