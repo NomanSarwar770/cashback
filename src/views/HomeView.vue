@@ -242,9 +242,9 @@ const prevImages = (type) => {
 
 
     <!-- Related Links & Advertisement -->
-    <div class="row content-row gx-0 px-0  mb-5">
+    <!-- <div class="row content-row gx-0 px-0  mb-5">
 
-      <!-- <div class="table-card">
+      <div class="table-card">
         <h3 class="related-linkss">Related Links</h3>
         <ul class="related-links">
           <li><a href="#">Exclusive Deals</a></li>
@@ -252,7 +252,7 @@ const prevImages = (type) => {
           <li><a href="#">Best Cashback Offers</a></li>
           <li><a href="#">Coupons & Vouchers</a></li>
         </ul>
-      </div> -->
+      </div>
 
       <div class="table-card" id="advrt">
         <h3 class="adv">Advertisement</h3>
@@ -263,7 +263,7 @@ const prevImages = (type) => {
         <h3 class="adv">Advertisement</h3>
         <img :src="img5" alt="Ad Banner" class="ad-banner" />
       </div>
-    </div>
+    </div> -->
   </div>
 
 
