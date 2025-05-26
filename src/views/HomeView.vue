@@ -135,7 +135,7 @@ const prevImages = (type) => {
     <RouterLink
       v-for="store in (showAllMostViewed ? mostViewedStores : mostViewedStores.slice(startIndexMostViewed, startIndexMostViewed + imagesPerPage))"
       :key="store.id"
-      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      :to="`/cashback/${store.link}`"
       class="image-card"
     >
       <img :src="store.logo" :alt="store.website" />
@@ -151,7 +151,7 @@ const prevImages = (type) => {
     <RouterLink
       v-for="store in mostViewedStores"
       :key="store.id"
-      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      :to="`/cashback/${store.link}`"
       class="dialog-image-card"
     >
       <img :src="store.logo" :alt="store.website" />
@@ -195,7 +195,7 @@ const prevImages = (type) => {
     <RouterLink
       v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
       :key="store.id"
-      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      :to="`/cashback/${store.link}`"
       class="image-card"
     >
       <img :src="store.logo" :alt="store.website" />
@@ -212,7 +212,7 @@ const prevImages = (type) => {
     <RouterLink
       v-for="store in sortedByRewardStores"
       :key="store.id"
-      :to="`/cashback/${store.website.toLowerCase().replace(/\s+/g, '-')}`"
+      :to="`/cashback/${store.link}`"
       class="dialog-image-card"
     >
       <img :src="store.logo" :alt="store.website" />
