@@ -127,7 +127,7 @@ const prevImages = (type) => {
 </div>
     <div class="row gx-0 px-0">
       <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
-        <h2 class="mb-0 fs-5 fs-md-3">The Most Viewed Stores</h2>
+        <h2 class="mb-0 fs-5 fs-md-3">Most Viewed Cashback</h2>
         <a href="#" @click.prevent="showMostViewedDialog = true" class="btn btn-sm btn-light fw-bold text-dark">See All</a>
       </div>
       <div class="image-grid-wrapper" >
@@ -140,12 +140,12 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
-      <!-- <p style="color: green; font-weight: bold;">{{ store.total_entries }}</p> -->
+      <p style="color: green; font-weight: bold;">{{ store.total_entries }}</p>
     </RouterLink>
   </div>
 </div>
       <!-- Most Viewed Stores Dialog -->
-      <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Stores"
+      <Dialog v-model:visible="showMostViewedDialog" modal header="Most Viewed Cashback"
         :style="{ width: '80vw', height: '80vh' }">
   <div class="dialog-image-grid">
     <RouterLink
@@ -156,7 +156,7 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
-      <!-- <p style="color: green; font-weight: bold;">{{ store.total_entries }}</p> -->
+      <p style="color: green; font-weight: bold;">{{ store.total_entries }}</p>
     </RouterLink>
   </div>
 </Dialog>
@@ -184,7 +184,7 @@ const prevImages = (type) => {
     <!-- Stores Sorted by Reward -->
     <div class="row gx-0 px-0">
       <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
-        <h2 class="mb-0 fs-5 fs-md-3">Stores Sorted by Reward</h2>
+        <h2 class="mb-0 fs-5 fs-md-3">Highest Cashback</h2>
         <a href="#" @click.prevent="showSortedByRewardDialog = true" class="btn btn-sm btn-light fw-bold text-dark">
           See All
         </a>
@@ -200,13 +200,13 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
-       <p style="color: green; font-weight: bold;">{{ Number(store.average_rate).toFixed(2) }}%</p>
+       <p style="color: green; font-weight: bold;">{{ Number(store.average_rate) }}</p>
     </RouterLink>
   </div>
 </div>
 
       <!-- Stores Sorted by Reward Dialog -->
-      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Stores Sorted by Reward"
+      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Highest Cashback"
         :style="{ width: '80vw', height: '80vh' }">
   <div class="dialog-image-grid">
     <RouterLink
@@ -217,7 +217,7 @@ const prevImages = (type) => {
     >
       <img :src="store.logo" :alt="store.website" />
       <p>{{ store.website }}</p>
-      <p style="color: green; font-weight: bold;">{{ Number(store.average_rate).toFixed(2) }}%</p>
+      <p style="color: green; font-weight: bold;">{{ Number(store.average_rate) }}</p>
     </RouterLink>
   </div>
 </Dialog>
