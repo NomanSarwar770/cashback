@@ -83,8 +83,16 @@ const prevImages = (type) => {
       <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
     </div>
 
+    <div class="carousel-item active">
+  <div class="slider-wrapper">
+    <a href="https://chromewebstore.google.com/detail/rev-savings/dhihbnnpblebokhdeniedlmlmdhliolb" target="_blank" class="slider-link">
+      <img :src="img2" class="slider-image" alt="Slide 2" style="pointer-events: none;">
+    </a>
+  </div>
+</div>
+
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item">
   <div class="slider-wrapper">
     <a href="#" class="slider-link" style="pointer-events: none;">
       <img :src="img1" class="slider-image" alt="Slide 1" />
@@ -97,13 +105,6 @@ const prevImages = (type) => {
     <a href="#" class="slider-link" style="pointer-events: none;">
 
     <img :src="img3" class="slider-image" alt="Slide 3">
-    </a>
-  </div>
-</div>
-<div class="carousel-item">
-  <div class="slider-wrapper">
-    <a href="https://chromewebstore.google.com/detail/rev-savings/dhihbnnpblebokhdeniedlmlmdhliolb" target="_blank" class="slider-link">
-      <img :src="img2" class="slider-image" alt="Slide 2" style="pointer-events: none;">
     </a>
   </div>
 </div>

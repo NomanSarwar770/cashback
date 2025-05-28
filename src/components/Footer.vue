@@ -10,6 +10,7 @@ import { RouterLink } from 'vue-router';
         <ul>
           <li><RouterLink to="">Our Story</RouterLink></li>
           <li><RouterLink to="/privacy">Privacy Policy</RouterLink></li>
+          <li><RouterLink to="/disclaimer">Disclaimer</RouterLink></li>
         </ul>
       </div>
 

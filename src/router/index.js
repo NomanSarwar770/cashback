@@ -9,6 +9,7 @@ import CreditCardPoints from '@/views/CreditCardPoints.vue'
 import ContactForm from '@/components/ContactForm.vue'
 import PrivacyPolicy from '@/components/PrivacyPolicy.vue'
 import LandingPage from '@/views/LandingPage.vue'
+import Disclaimer from '@/components/Disclaimer.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,7 @@ const router = createRouter({
     { path: '/giftcards/:store', name: 'Travel', component: Travel },
     { path: '/contact', name: 'Contact', component: ContactForm },
     { path: '/privacy', name: 'Privacy', component: PrivacyPolicy },
+    { path: '/disclaimer', name: 'Disclaimer', component: Disclaimer },
     { path: '/landingpage', name: 'LandingPage', component: LandingPage },
     {
       path: '/travelpointsrewards/:store',
