@@ -184,7 +184,7 @@ const prevImages = (type) => {
     <!-- Stores Sorted by Reward -->
     <div class="row gx-0 px-0">
       <div class="d-flex justify-content-between align-items-center mb-3 px-3 px-md-0">
-        <h2 class="mb-0 fs-5 fs-md-3">Highest Cashback</h2>
+        <h2 class="mb-0 fs-5 fs-md-3">Popular Giftcards</h2>
         <a href="#" @click.prevent="showSortedByRewardDialog = true" class="btn btn-sm btn-light fw-bold text-dark">
           See All
         </a>
@@ -195,7 +195,7 @@ const prevImages = (type) => {
     <RouterLink
       v-for="store in (showAllSortedByReward ? sortedByRewardStores : sortedByRewardStores.slice(startIndexSortedByReward, startIndexSortedByReward + imagesPerPage))"
       :key="store.id"
-      :to="`/cashback/${store.link}`"
+      :to="`/giftcards/${store.link}`"
       class="image-card"
     >
       <img :src="store.logo" :alt="store.website" />
@@ -206,13 +206,13 @@ const prevImages = (type) => {
 </div>
 
       <!-- Stores Sorted by Reward Dialog -->
-      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Highest Cashback"
+      <Dialog v-model:visible="showSortedByRewardDialog" modal header="Popular Giftcards"
         :style="{ width: '80vw', height: '80vh' }">
   <div class="dialog-image-grid">
     <RouterLink
       v-for="store in sortedByRewardStores"
       :key="store.id"
-      :to="`/cashback/${store.link}`"
+      :to="`/giftcards/${store.link}`"
       class="dialog-image-card"
     >
       <img :src="store.logo" :alt="store.website" />
